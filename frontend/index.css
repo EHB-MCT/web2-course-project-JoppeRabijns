@@ -1,0 +1,418 @@
+/* IMPORTS BEGIN */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+/* IMPORTS END*/
+
+/* GENERAL BEGIN */
+
+*:focus {
+    outline: none;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+    color: #313131;
+}
+
+body {
+    margin: 0px 30px;
+    padding: 0;
+    background-image: url(./images/background.png);
+}
+
+/* GENERAL END */
+
+/* NAV BEGIN */
+#logoBackground {
+    background-color: #A2CE2A;
+    width: 80px;
+    height: 80px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#logoBackground img {
+    width: 60px;
+    height: 60px;
+}
+
+#menu {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#menu ul li {
+    margin-top: ;
+    list-style: none;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#menu ul li a {
+    text-decoration: none;
+    font: 14px/21px Poppins;
+    color: #313131;
+
+}
+
+#menu ul li a:hover {
+    border-bottom: 2px solid #A2CE2A;
+}
+
+#active {
+    border-bottom: 2px solid #A2CE2A;
+}
+
+/* NAV END */
+
+/* FORM BEGIN */
+#form {
+    margin-top: 10vh;
+    margin-bottom: 7vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formTitle {
+    font: normal normal bold 100px Poppins;
+    text-align: center;
+    margin: 0%;
+}
+
+
+#formSearchbar {
+    width: 793px;
+    height: 56px;
+    background: #FFFFFF;
+    border: 2px solid #A2CE2A;
+    border-radius: 44px;
+    text-align: center;
+}
+
+#formSearchbar::placeholder {
+    color: #313131;
+    font-size: 14px;
+}
+
+#formSearchbar:focus {
+    outline: none;
+}
+
+#formSubmit {
+    margin-top: 20px;
+    width: 267px;
+    height: 58px;
+    border-radius: 44px;
+    font-family: 'Poppins', sans-serif;
+    background: #A2CE2A;
+    border: none;
+    color: #FFFFFF;
+    font: 600 20px/20px Poppins;
+}
+
+#formSubmit:hover {
+    background: #b7f01b;
+}
+
+#formFilters {
+    width: 793px;
+    margin-top: 20px;
+}
+
+#formFilter {
+    float: left;
+    border: 1px solid #A2CE2A;
+    background: #ffffff;
+    border-radius: 44px;
+    font: 14px/21px Poppins;
+    color: #313131;
+    width: 89px;
+    margin-left: 7px;
+}
+
+#formFilter label span {
+    text-align: center;
+    padding: 3px 0px;
+    display: block;
+    border-radius: 44px;
+}
+
+#formFilter label input {
+    position: absolute;
+    top: -20px;
+}
+
+#formFilter input:checked+span {
+    background-color: #A2CE2A;
+    color: #fff;
+}
+
+#formFilter input:hover+span {
+    background-color: #A2CE2A;
+    color: #fff;
+}
+
+#formName,
+#formDescription,
+#formLongitude,
+#formLatitude {
+    width: 30vw;
+    height: 30px;
+    margin-top: 10px;
+    background: #FFFFFF;
+    border: 2px solid #A2CE2A;
+    border-radius: 44px;
+    text-align: center;
+}
+
+
+/* FORM END */
+
+/* MAP BEGIN*/
+#mapBorder {
+    position: relative;
+    margin-top: 40px;
+    border-radius: 44px;
+    height: 80vh;
+    overflow: hidden;
+    border: 2px solid #A2CE2A;
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+#map {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 3%;
+    bottom: 0;
+    height: 90%;
+    width: 25%;
+    z-index: 999;
+    margin: auto;
+    overflow-y: scroll;
+    border-radius: 14px;
+    padding-right: 5px;
+}
+
+.marker {
+    background-image: url('./images/logoIcon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.restaurantStyle {
+    border: 2px solid #A2CE2A;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 14px;
+    background-color: #fff;
+    overflow-y: visible;
+}
+
+#restaurants .title {
+    color: #A2CE2A;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+
+/* SCROLLBAR BEGIN */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #A2CE2A;
+    border-radius: 10px;
+}
+
+
+/* SCROLLBAR END*/
+
+/* MAP END*/
+
+#geocoder {
+    z-index: 1;
+    width: 30vw;
+    text-align: center;
+
+    margin-top: 10px;
+    border-radius: 44px;
+
+}
+
+.mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+}
+
+/* Basics */
+.mapboxgl-ctrl-geocoder,
+.mapboxgl-ctrl-geocoder *,
+.mapboxgl-ctrl-geocoder *:after,
+.mapboxgl-ctrl-geocoder *:before {
+    box-sizing: border-box;
+}
+
+.mapboxgl-ctrl-geocoder {
+    font-size: 14px;
+    line-height: 24px;
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    min-width: 240px;
+    z-index: 1;
+    border: 2px solid #A2CE2A;
+    border-radius: 44px;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+    font: inherit;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    height: 50px;
+    color: #404040;
+    /* fallback */
+    color: rgba(0, 0, 0, 0.75);
+    padding: 0px 45px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mapboxgl-ctrl-geocoder--input::-ms-clear {
+    display: none;
+    /* hide input clear button in IE */
+}
+
+.mapboxgl-ctrl-geocoder--input:focus {
+    color: #404040;
+    /* fallback */
+    color: rgba(0, 0, 0, 0.75);
+    outline: 0;
+    box-shadow: none;
+    outline: thin dotted\8;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--pin-right>* {
+    z-index: 2;
+    position: absolute;
+    right: 8px;
+    top: 7px;
+    display: none;
+}
+
+.mapboxgl-ctrl-geocoder,
+.mapboxgl-ctrl-geocoder .suggestions {
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, .1);
+}
+
+/* Collapsed */
+.mapboxgl-ctrl-geocoder.mapboxgl-ctrl-geocoder--collapsed {
+    width: 50px;
+    min-width: 50px;
+    transition: width .25s, min-width .25s;
+}
+
+/* Suggestions */
+.mapboxgl-ctrl-geocoder .suggestions {
+    background-color: #fff;
+    border-radius: 4px;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    top: 110%;
+    /* fallback */
+    top: calc(100% + 6px);
+    z-index: 1000;
+    overflow: hidden;
+    font-size: 15px;
+}
+
+.mapboxgl-ctrl-bottom-left .suggestions,
+.mapboxgl-ctrl-bottom-right .suggestions {
+    top: auto;
+    bottom: 100%;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions>li>a {
+    cursor: default;
+    display: block;
+    padding: 6px 12px;
+    color: #404040;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions>.active>a,
+.mapboxgl-ctrl-geocoder .suggestions>li>a:hover {
+    color: #404040;
+    background-color: #f3f3f3;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion-title {
+    font-weight: bold;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion-title,
+.mapboxgl-ctrl-geocoder--suggestion-address {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Icons */
+.mapboxgl-ctrl-geocoder--icon {
+    display: inline-block;
+    vertical-align: middle;
+    speak: none;
+    fill: #757575;
+    top: 15px;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    width: 23px;
+    height: 23px;
+}
+
+.mapboxgl-ctrl-geocoder--button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    background: #fff;
+    line-height: 1;
+}
+
+.mapboxgl-ctrl-geocoder--icon-close {
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+    margin-right: 3px;
+}
+
+.mapboxgl-ctrl-geocoder--button:hover .mapboxgl-ctrl-geocoder--icon-close {
+    fill: #909090;
+}

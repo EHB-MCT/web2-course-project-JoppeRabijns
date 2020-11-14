@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js">
+  </script>
+  <header>
+    <nav id="menu">
+      <div id="logoBackground">
+        <img src="./images/logo.png" alt="">
+      </div>
+      <ul>
+        <li id="menuItem"><a href="./restaurants.html">Restaurants</a></li>
+        <li id="menuItem"><a id="active" href="">restaurant toevoegen</a></li>
+      </ul>
+    </nav>
+
+  </header>
+  <main>
+    <form autocomplete="off" id="form">
+      <h1 id="formTitle">Restaurant toevoegen</h1>
+      <input id="formName" type="text" placeholder="Naam van Restaurant">
+      <input id="formDescription" type="text" placeholder="Beschrijving van estaurant">
+      <div id="geocoder"></div>
+      <input id="formSubmit" type="submit" value="TOEVOEGEN">
+    </form>
+
+  </main>
+  <script src="./post.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="./index.css">
+
+</head>
+
+<body>
+  <header>
+    <nav id="menu">
+      <div id="logoBackground">
+        <img src="./images/logo.png" alt="">
+      </div>
+      <ul>
+        <li id="menuItem"><a id="active" href="./restaurants.html">Restaurants</a></li>
+        <li id="menuItem"><a href="./addRestaurant.html">restaurant toevoegen</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="mapBorder">
+    <div class='sidebar'>
+      <div id='restaurants' class='restaurants'></div>
+    </div>
+    <div id='map'></div>
+  </div>
+  <script src="./index.js"></script>
+</body>
+
+</html>
