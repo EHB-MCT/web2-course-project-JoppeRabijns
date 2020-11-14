@@ -5,6 +5,9 @@ const port = 3000;
 const apiRouter = express.Router();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const {
+  query
+} = require('express');
 
 //Mongo
 const MongoClient = require('mongodb').MongoClient;
@@ -24,6 +27,10 @@ app.use(bodyParser.json());
 app.use('/api', apiRouter);
 
 
+app.get('/', (req, res) => {
+  res.send(`http://${req.headers.host}/api/restaurants`);
+});
+
 //router
 apiRouter.route('/restaurants')
   .get((req, res) => {
@@ -31,7 +38,7 @@ apiRouter.route('/restaurants')
     const collection = database.collection("restaurants");
     const cursor = collection.find().toArray((err, result) => {
       if (err) {
-        throw err;
+        return res.status(500).send(err);
       }
       res.json(result);
     });
@@ -40,12 +47,12 @@ apiRouter.route('/restaurants')
     const database = client.db(dbName);
     const collection = database.collection("restaurants");
     collection.insertOne(req.body).then(result => {
+      res.json(req.body);
       console.log(req.body);
+    }).catch((error) => {
+      return res.status(500).send(error);
     });
-
-
   });
-
 
 app.listen(port, () => {
   client.connect(err => {
