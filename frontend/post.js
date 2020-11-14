@@ -12,7 +12,8 @@ geocoder.addTo('#geocoder');
 
 geocoder.on('result', function (e) {
   let form = document.getElementById("form");
-  let title = document.getElementById("formTitle");
+  let formTitle = document.getElementById("formTitle");
+  let formError = document.getElementById("formError");
   form.addEventListener('submit', (event) => {
     let name = document.getElementById("formName").value;
     let description = document.getElementById("formDescription").value;
@@ -31,9 +32,10 @@ geocoder.on('result', function (e) {
       }
     };
     if (name == "" || description == "") {
+      formError.innerHTML = "Gelieve alle velden in te vullen!";
       event.preventDefault();
     } else {
-      title.innerHTML = "Restaurant toegevoegd!";
+      formTitle.innerHTML = "Restaurant toegevoegd!";
       postData(restaurantData);
       event.preventDefault();
     }

@@ -44,9 +44,11 @@ function createRestaurantList(data) {
     link.className = 'title';
     link.id = "link-" + restaurantData.name;
     link.innerHTML = restaurantData.name;
-    let details = restaurant.appendChild(document.createElement('div'));
+    let details = restaurant.appendChild(document.createElement('h4'));
+    details.className = 'description';
     details.innerHTML = restaurantData.description;
-    let address = restaurant.appendChild(document.createElement('div'));
+    let address = restaurant.appendChild(document.createElement('h6'));
+    address.className = 'address';
     address.innerHTML = restaurantData.address;
   }
 }

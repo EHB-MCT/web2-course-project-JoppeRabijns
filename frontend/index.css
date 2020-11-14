@@ -229,6 +229,20 @@ body {
     text-decoration: none;
 }
 
+.address {
+    font-size: 12px;
+    font-weight: 200;
+    padding: 0px;
+    margin: 0px;
+}
+
+.description {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0px;
+    margin: 0px;
+}
+
 
 /* SCROLLBAR BEGIN */
 
