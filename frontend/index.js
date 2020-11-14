@@ -46,5 +46,7 @@ function createRestaurantList(data) {
     link.innerHTML = restaurantData.name;
     let details = restaurant.appendChild(document.createElement('div'));
     details.innerHTML = restaurantData.description;
+    let address = restaurant.appendChild(document.createElement('div'));
+    address.innerHTML = restaurantData.address;
   }
 }

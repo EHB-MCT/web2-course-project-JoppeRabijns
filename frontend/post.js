@@ -12,11 +12,10 @@ geocoder.addTo('#geocoder');
 
 geocoder.on('result', function (e) {
   let form = document.getElementById("form");
-
+  let title = document.getElementById("formTitle");
   form.addEventListener('submit', (event) => {
     let name = document.getElementById("formName").value;
     let description = document.getElementById("formDescription").value;
-
     let restaurantData = {
       "type": "Feature",
       "geometry": {
@@ -27,13 +26,16 @@ geocoder.on('result', function (e) {
       },
       "properties": {
         "name": `${name}`,
-        "description": `${description}`
+        "description": `${description}`,
+        "address": `${e.result.place_name}`,
       }
     };
-    if (name == "" && description == "") {
-      console.log("fout");
+    if (name == "" || description == "") {
+      event.preventDefault();
     } else {
+      title.innerHTML = "Restaurant toegevoegd!";
       postData(restaurantData);
+      event.preventDefault();
     }
   });
 });
