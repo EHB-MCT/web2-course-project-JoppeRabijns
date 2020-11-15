@@ -45,11 +45,9 @@ function createRestaurantList(data) {
     let restaurantData = data[key].properties;
     let restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
-    restaurant.id = "restaurant-" + restaurantData.name;
     restaurant.className = 'restaurantStyle';
     let link = restaurant.appendChild(document.createElement('a'));
     link.className = 'title';
-    link.id = "link-" + restaurantData.name;
     link.innerHTML = restaurantData.name;
     let details = restaurant.appendChild(document.createElement('h4'));
     details.className = 'description';

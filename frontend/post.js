@@ -3,7 +3,7 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9wcGVyYWJpam5zIiwiYSI6ImNqNnl0dWxpNDJmeDEyeG10cWV0cnloczQifQ.YSoKiZUOwUPNMWbSPHBFbA';
 var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
-  types: 'place,postcode,locality,neighborhood,address,poi,poi.landmark',
+  types: 'address,poi,poi.landmark',
   countries: 'BE',
   placeholder: 'Adres toevoegen'
 });
@@ -41,10 +41,6 @@ geocoder.on('result', function (e) {
     }
   });
 });
-
-
-
-
 
 async function postData(restaurantData) {
   let response = await fetch('http://localhost:3000/api/restaurants', {
