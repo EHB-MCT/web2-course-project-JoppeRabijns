@@ -5,14 +5,12 @@ const port = 3000;
 const apiRouter = express.Router();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const {
-  query
-} = require('express');
 
 //Mongo
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://root:root@cluster0.bo4mb.mongodb.net/glutenvrijdichtbij?retryWrites=true&w=majority";
 const dbName = 'glutenvrijdichtbij';
+const ObjectId = require("mongodb").ObjectID;
 const client = new MongoClient(uri, {
   useNewUrlParser: true
 });
@@ -29,6 +27,7 @@ app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
   res.send(`http://${req.headers.host}/api/restaurants`);
+  res.send(`http://${req.headers.host}/api/restaurants/:id`);
 });
 
 //router
@@ -36,9 +35,9 @@ apiRouter.route('/restaurants')
   .get((req, res) => {
     const database = client.db(dbName);
     const collection = database.collection("restaurants");
-    const cursor = collection.find().toArray((err, result) => {
-      if (err) {
-        return res.status(500).send(err);
+    const cursor = collection.find().toArray((error, result) => {
+      if (error) {
+        return res.status(500).send(error);
       }
       res.json(result);
     });
@@ -51,6 +50,20 @@ apiRouter.route('/restaurants')
       console.log(req.body);
     }).catch((error) => {
       return res.status(500).send(error);
+    });
+  });
+
+apiRouter.route('/restaurants/:id')
+  .get((request, response) => {
+    const database = client.db(dbName);
+    const collection = database.collection("restaurants");
+    collection.findOne({
+      "_id": new ObjectId(request.params.id)
+    }, (error, result) => {
+      if (error) {
+        return response.status(500).send(error);
+      }
+      response.send(result);
     });
   });
 
