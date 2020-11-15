@@ -5,6 +5,7 @@ const port = 3000;
 const apiRouter = express.Router();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const listEndpoints = require("express-list-endpoints");
 
 //Mongo
 const MongoClient = require('mongodb').MongoClient;
@@ -26,8 +27,7 @@ app.use('/api', apiRouter);
 
 
 app.get('/', (req, res) => {
-  res.send(`http://${req.headers.host}/api/restaurants`);
-  res.send(`http://${req.headers.host}/api/restaurants/:id`);
+  res.send(listEndpoints(app));
 });
 
 //router
