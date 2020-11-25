@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <header>
+    <nav id="menu">
+      <div id="logoBackground">
+        <a href="./index.html">
+          <img src="./images/logo.png" alt="">
+        </a>
+      </div>
+      <ul>
+        <li id="menuItem"><a id="active" href="">Recepten</a></li>
+        <li id="menuItem"><a href="./restaurants.html">Restaurants</a></li>
+        <li id="menuItem"><a href="./addRestaurant.html">restaurant toevoegen</a></li>
+        <li id="menuItem"><a href="">Mijn Profiel</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="filterDiv"></div>
+    <div id="searchResults">
+      <div id="card">
+        <div id="cardImageDiv">
+          <div id="cardInfoStars">
+            <h6 id="cardInfoText">4.0</h6>
+          </div>
+          <img id="cardImage" src="${data.results[key].image}" alt="">
+        </div>
+        <h2 id="cardTitle">${data.results[key].title}</h2>
+        <button class="cardButton" id="${data.results[key].id}">Bekijk</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>

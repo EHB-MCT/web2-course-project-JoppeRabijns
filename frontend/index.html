@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <header>
+        <nav id="menu">
+            <div id="logoBackground">
+                <a href="./index.html">
+                    <img src="./images/logo.png" alt="">
+                </a>
+            </div>
+            <ul>
+                <li id="menuItem"><a id="active" href="">Recepten</a></li>
+                <li id="menuItem"><a href="./restaurants.html">Restaurants</a></li>
+                <li id="menuItem"><a href="./addRestaurant.html">restaurant toevoegen</a></li>
+                <li id="menuItem"><a href="">Mijn Profiel</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <form autocomplete="off" id="form" action="">
+            <h1 id="formTitle">Wat wil je eten?</h1>
+            <input id="formSearchbar" type="search" placeholder="Ingrediënten, recepten, …">
+            <div id="formFilters">
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>PASTA</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>RIJST</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>VLEES</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>VIS</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>SALADE</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>SOEP</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>ALCOHOL</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input type="checkbox" value="1"><span>VEGAN
+
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <input id="formSubmit" type="submit" value="ZOEKEN">
+        </form>
+
+        <div id="favorites">
+            <h2 id="favoritesTitle">Uw zoekresultaten</h2>
+            <div id="cards">
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+
+    </footer>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
