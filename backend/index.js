@@ -6,6 +6,7 @@ const apiRouter = express.Router();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const listEndpoints = require("express-list-endpoints");
+const path = require("path");
 
 //Mongo
 const MongoClient = require('mongodb').MongoClient;
@@ -27,7 +28,7 @@ app.use('/api', apiRouter);
 
 
 app.get('/', (req, res) => {
-  res.send(listEndpoints(app));
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 //router
