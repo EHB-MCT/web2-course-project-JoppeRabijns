@@ -43,7 +43,7 @@ geocoder.on('result', function (e) {
 });
 
 async function postData(restaurantData) {
-  let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants', {
+  let response = await fetch('https://cors-anywhere.herokuapp.com/https://web2-course-project-api-jopper.herokuapp.com/api/restaurants', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
