@@ -11,7 +11,7 @@ var map = new mapboxgl.Map({
 fetchData();
 
 async function fetchData() {
-  let response = await fetch('http://localhost:3000/api/restaurants');
+  let response = await fetch('https://glutenvrijdichtbij.herokuapp.com/api/restaurants');
   let data = await response.json();
   allData(data);
   createMarkers(data);

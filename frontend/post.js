@@ -43,7 +43,7 @@ geocoder.on('result', function (e) {
 });
 
 async function postData(restaurantData) {
-  let response = await fetch('http://localhost:3000/api/restaurants', {
+  let response = await fetch('https://glutenvrijdichtbij.herokuapp.com/api/restaurants', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
