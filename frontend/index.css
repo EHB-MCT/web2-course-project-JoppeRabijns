@@ -29,7 +29,7 @@ html {
 body {
     margin: 0px 30px;
     padding: 0;
-    background-image: url(./images/background.png);
+    background-image: url(./images/background.jpg);
 }
 
 /* GENERAL END */
@@ -56,17 +56,21 @@ i {
 
 .icon-star:before {
     content: "\e902";
-    margin-right: 2px;
+    margin-top: 3px;
+    margin-left: 7px;
+    float: left;
 }
 
 .icon-clock:before {
     content: "\e900";
-    margin-right: 4px;
+    margin-top: 3px;
+    margin-left: 7px;
+    float: left;
 }
 
 .icon-heart:before {
     content: "\e901";
-    color: white;
+    color: #fff;
     position: absolute;
     z-index: 999;
     right: 23px;
@@ -306,17 +310,18 @@ i {
 
 
 #cardTitle {
+    height: 65px;
     margin-top: 4%;
     margin-bottom: 3%;
     text-align: center;
     text-transform: uppercase;
-    font: 800 15px Poppins;
+    font: 800 20px Poppins;
+    overflow: hidden;
 }
 
 .cardButton {
     width: 60%;
     height: 12%;
-    margin-top: 20px;
     margin-left: 20%;
     border-radius: 25px;
     font-family: 'Poppins', sans-serif;
