@@ -17,67 +17,65 @@
                 </a>
             </div>
             <ul>
-                <li id="menuItem"><a id="active" href="">Recepten</a></li>
+                <li id="menuItem"><a id="active" href="">Recipes</a></li>
                 <li id="menuItem"><a href="./restaurants.html">Restaurants</a></li>
-                <li id="menuItem"><a href="./addRestaurant.html">restaurant toevoegen</a></li>
-                <li id="menuItem"><a href="">Mijn Profiel</a></li>
+                <li id="menuItem"><a href="./addRestaurant.html">Add restaurant</a></li>
+                <li id="menuItem"><a href="">Mijn profile</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <form autocomplete="off" id="form" action="">
-            <h1 id="formTitle">Wat wil je eten?</h1>
-            <input id="formSearchbar" type="search" placeholder="Ingrediënten, recepten, …">
+            <h1 id="formTitle">What to eat?</h1>
+            <input id="formSearchbar" type="search" placeholder="Ingredients, recipes, …">
             <div id="formFilters">
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>PASTA</span>
+                        <input id="checkbox-1" type="checkbox" value="DESSERT"><span>DESSERT</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>RIJST</span>
+                        <input id="checkbox-2" type="checkbox" value="BREAKFAST"><span>BREAKFAST</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>VLEES</span>
+                        <input id="checkbox-3" type="checkbox" value="BEVERAGE"><span>BEVERAGE</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>VIS</span>
+                        <input id="checkbox-4" type="checkbox" value="SNACK"><span>SNACK</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>SALADE</span>
+                        <input id="checkbox-5" type="checkbox" value="SALAD"><span>SALAD</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>SOEP</span>
+                        <input id="checkbox-6" type="checkbox" value="SOUP"><span>SOUP</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>ALCOHOL</span>
+                        <input id="checkbox-7" type="checkbox" value="SIDE DISH"><span>SIDE DISH</span>
                     </label>
                 </div>
                 <div id="formFilter">
                     <label>
-                        <input type="checkbox" value="1"><span>VEGAN
-
-                        </span>
+                        <input id="checkbox-8" type="checkbox" value="DRINK"><span>DRINK</span>
                     </label>
                 </div>
             </div>
-            <input id="formSubmit" type="submit" value="ZOEKEN">
+            <input id=" formSubmit" type="submit" value="SEARCH">
         </form>
 
         <div id="favorites">
-            <h2 id="favoritesTitle">Uw zoekresultaten</h2>
+            <h2 id="favoritesTitle">Your search results</h2>
             <div id="cards">
             </div>
         </div>

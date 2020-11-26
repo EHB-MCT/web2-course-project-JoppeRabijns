@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Glutenvrij Dichtbij - Recipes</title>
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
   <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./css/mapbox.css">
 
 </head>
 
@@ -15,13 +16,13 @@
   <header>
     <nav id="menu">
       <div id="logoBackground">
-        <img src="./images/logo.png" alt="">
+        <img src="./images/logo.png" alt="logo">
       </div>
       <ul>
-        <li id="menuItem"><a href="./index.html">Recepten</a></li>
+        <li id="menuItem"><a href="./index.html">Recipes</a></li>
         <li id="menuItem"><a id="active" href="./restaurants.html">Restaurants</a></li>
-        <li id="menuItem"><a href="./addRestaurant.html">restaurant toevoegen</a></li>
-        <li id="menuItem"><a href="">Mijn Profiel</a></li>
+        <li id="menuItem"><a href="./addRestaurant.html">Add restaurants</a></li>
+        <li id="menuItem"><a href="">My profile</a></li>
       </ul>
     </nav>
   </header>
@@ -32,7 +33,6 @@
     </div>
     <div id='map'></div>
   </div>
-  <div id="allData"></div>
   <script src="./restaurants.js"></script>
 </body>
 

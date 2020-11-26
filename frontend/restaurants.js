@@ -13,18 +13,10 @@ fetchData();
 async function fetchData() {
   let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants');
   let data = await response.json();
-  allData(data);
   createMarkers(data);
   createRestaurantList(data);
 }
 
-function allData(data) {
-  for (let key in data) {
-    const dataDiv = document.getElementById('allData');
-    let restaurantData = dataDiv.appendChild(document.createElement('h6'));
-    restaurantData.innerHTML = JSON.stringify(data[key]);
-  }
-}
 
 function createMarkers(data) {
   for (let key in data) {
@@ -46,9 +38,12 @@ function createRestaurantList(data) {
     let restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
+    restaurant.id = "restaurant-" + restaurantData.id;
     let link = restaurant.appendChild(document.createElement('a'));
+    link.href = '#';
     link.className = 'title';
     link.innerHTML = restaurantData.name;
+    link.id = "link-" + restaurantData.id;
     let details = restaurant.appendChild(document.createElement('h4'));
     details.className = 'description';
     details.innerHTML = restaurantData.description;
@@ -56,4 +51,5 @@ function createRestaurantList(data) {
     address.className = 'address';
     address.innerHTML = restaurantData.address;
   }
+
 }

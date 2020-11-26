@@ -5,7 +5,7 @@ var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   types: 'address,poi,poi.landmark',
   countries: 'BE',
-  placeholder: 'Adres toevoegen'
+  placeholder: 'Address'
 });
 
 geocoder.addTo('#geocoder');
@@ -32,12 +32,15 @@ geocoder.on('result', function (e) {
       }
     };
     if (name == "" || description == "") {
-      formError.innerHTML = "Gelieve alle velden in te vullen!";
+      formError.innerHTML = "Please fill in all the fields";
       event.preventDefault();
     } else {
-      formTitle.innerHTML = "Restaurant toegevoegd!";
-      postData(restaurantData);
       event.preventDefault();
+      formTitle.innerHTML = "Restaurant added!";
+      postData(restaurantData);
+      setTimeout(function () {
+        window.location = "./restaurants.html";
+      }, 2500);
     }
   });
 });

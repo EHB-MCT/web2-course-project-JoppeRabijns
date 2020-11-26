@@ -17,10 +17,6 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true
 });
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
 
 //middleware
 app.use(bodyParser.urlencoded({
@@ -77,6 +73,6 @@ app.listen(port, () => {
     if (err) {
       throw err;
     }
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
   });
 });
