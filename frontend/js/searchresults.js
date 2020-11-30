@@ -6,12 +6,13 @@ async function fetchData() {
   let search = localStorage.getItem("search");
   let offset = localStorage.getItem("offset");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=2&query=${search}&addRecipeInformation=true&offset=${offset}&type=${types}`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e24201e68c7a4406a41930950e2aeef2&intolerances=gluten&number=2&query=${search}&addRecipeInformation=true&offset=${offset}&type=${types}`);
   let data = await response.json();
   addRecipe(data);
 }
 
 function addRecipe(data) {
+  console.log(data);
   let HTML = "";
   if (data.results == 0) {
     HTML += `<h1>No recipe were found...</h1>`;
@@ -34,6 +35,11 @@ function addRecipe(data) {
   </div>`;
     }
   }
-
   document.getElementById("searchResults").innerHTML = HTML;
+  for (let key in data.results) {
+    document.getElementById(`${data.results[key].id}`).addEventListener("click", () => {
+      localStorage.setItem("idRecipe", data.results[key].id);
+      window.location = "./recipeResult.html";
+    });
+  }
 }

@@ -445,3 +445,29 @@ i {
 /* SCROLLBAR END*/
 
 /* MAP END*/
+
+
+#recipeImage {
+    width: 40%;
+    border-radius: 44px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+#recipeImage img {
+    width: 100%;
+}
+
+#recipeIngredients {
+    width: 30%;
+    display: inline-block;
+    margin-left: 25px;
+}
+
+#recipe h2 {
+    text-align: center;
+}
+
+#recipeInstructions {
+    width: 70%;
+}
