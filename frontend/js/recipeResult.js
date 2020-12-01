@@ -17,22 +17,26 @@ function renderRecipe(data) {
     instructions += `<li>${data.analyzedInstructions[0].steps[key].step}</li>`
   }
   for (let key in data.extendedIngredients) {
-    ingredients += `<p>${data.extendedIngredients[key].name}</p>`
+    ingredients += `<li>${data.extendedIngredients[key].name}</li>`
   }
   HTML += `
+  <div id="recipeBackground">
+  <div id="recipeBack">
+  </div>
   <h2>${data.title}</h2>
   <div id="recipeImage">
     <img src="${data.image}" alt="">
   </div>
   <div id="recipeIngredients">
     <h3>Ingredients</h3>
-    <p> ${ingredients}</p>
+    <ul> ${ingredients}</ul>
   </div>
   <div id="recipeInstructions">
     <h3>Instructions:</h3>
     <ol>
    ${instructions}
    </ol>
+  </div>
   </div>`
   document.getElementById("recipe").innerHTML = HTML;
 }
