@@ -8,6 +8,18 @@ var map = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/light-v10'
 });
 
+var geocoder = new MapboxGeocoder({
+  accessToken: mapboxgl.accessToken,
+  mapboxgl: mapboxgl,
+  marker: true,
+  types: 'address,poi,poi.landmark',
+  countries: 'BE',
+  placeholder: 'Your location',
+  zoom: 13
+});
+
+map.addControl(geocoder, 'top-right');
+
 fetchData();
 
 async function fetchData() {
@@ -35,7 +47,7 @@ function createMarkers(data) {
 function createRestaurantList(data) {
   for (let key in data) {
     let restaurantData = data[key].properties;
-    let restaurants = document.getElementById('restaurants');
+    var restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
     restaurant.id = "restaurant-" + restaurantData.id;

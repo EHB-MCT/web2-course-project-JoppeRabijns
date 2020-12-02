@@ -4,7 +4,6 @@ async function fetchData() {
   let idRecipe = localStorage.getItem("idRecipe");
   let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=e24201e68c7a4406a41930950e2aeef2`);
   let data = await response.json();
-  console.log(data);
   renderRecipe(data);
 }
 
