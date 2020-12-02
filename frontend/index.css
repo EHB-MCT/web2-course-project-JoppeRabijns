@@ -480,9 +480,7 @@ i {
 #recipeBackground {
     margin-top: 20px;
     border: 2px solid #A2CE2A;
-    width: 65%;
-    height: 80vh;
-    background-color: #ffffffc2;
+    background-color: #ffffffab;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 44px;
 }
@@ -495,7 +493,6 @@ i {
     border-radius: 40px 0px 15px 0px;
 }
 
-#similarRecipes {
+#similar {
     display: inline-block;
-    width: 20%;
 }
