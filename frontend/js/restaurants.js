@@ -12,7 +12,7 @@ var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   mapboxgl: mapboxgl,
   marker: true,
-  types: 'address,poi,poi.landmark',
+  types: 'place,postcode,address,poi',
   countries: 'BE',
   placeholder: 'Your location',
   zoom: 13

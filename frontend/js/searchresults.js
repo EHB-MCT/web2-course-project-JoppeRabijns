@@ -4,9 +4,8 @@ fetchData();
 
 async function fetchData() {
   let search = localStorage.getItem("search");
-  let offset = localStorage.getItem("offset");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=cee7a81c28e441efa3b14a67c611c790&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&offset=${offset}&type=${types}`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=cee7a81c28e441efa3b14a67c611c790&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
   let data = await response.json();
   addRecipe(data);
 }

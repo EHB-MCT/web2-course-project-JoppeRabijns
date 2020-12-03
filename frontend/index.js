@@ -12,16 +12,14 @@ document.getElementById("form").addEventListener("submit", (event) => {
     }
   }
   let search = document.getElementById("formSearchbar").value;
-  let offset = Math.ceil(Math.random() * 10);
-  addToLocalstorage(search, offset, typeString);
+  addToLocalstorage(search, typeString);
   window.location = "./searchresults.html";
 });
 
-function addToLocalstorage(search, offset, typeString) {
+function addToLocalstorage(search, typeString) {
   if (typeof (Storage) !== "undefined") {
     window.localStorage.clear();
     localStorage.setItem("search", search);
-    localStorage.setItem("offset", offset);
     localStorage.setItem("types", typeString);
   }
 }
