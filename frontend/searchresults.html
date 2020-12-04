@@ -30,18 +30,20 @@
   <main>
     <div id="filterDiv">
       <div id="sortFilters">
-        <h3>Filter:</h3>
+        <h3>Sort:</h3>
         <form action="">
-          <input type="radio" id="rate1" name="rating" value="5">
-          <label for="rate1">5 sterren</label><br>
-          <input type="radio" id="rate2" name="rating" value="4">
-          <label for="rate2">4 sterren</label><br>
-          <input type="radio" id="rate3" name="rating" value="3">
-          <label for="rate3">3 sterren</label><br>
-          <input type="radio" id="rate4" name="rating" value="2">
-          <label for="rate4">2 of minder sterren</label><br><br>
-        </form>
+          <input type="radio" id="time" name="sort" value="1">
+          <label for="time">time</label><br>
+          <input type="radio" id="healthScore" name="sort" value="1">
+          <label for="healthScore">health score</label><br>
+          <hr>
+          <label><input id="vegetarian" type="radio" name="filter" value="vegetarian">VEGETARIAN</label> <br>
+          <label><input id="vegan" type="radio" name="filter" value="vegan">VEGAN</label><br>
+          <label><input id="fodmap" type="radio" name="filter" value="fodmap">LOW FODMAP</label>
       </div>
+      <br>
+      </form>
+    </div>
     </div>
     <div id="searchResults">
     </div>

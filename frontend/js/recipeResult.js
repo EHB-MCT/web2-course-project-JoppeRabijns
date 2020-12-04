@@ -5,7 +5,9 @@ async function fetchData() {
   let idRecipe = localStorage.getItem("idRecipe");
   let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=cee7a81c28e441efa3b14a67c611c790`);
   let data = await response.json();
+  console.log(data);
   renderRecipe(data);
+
 }
 
 
@@ -29,13 +31,13 @@ function renderSimilarRecipes(similarData) {
       <div id="cardInfoTime">
           <h6 id="cardInfoText"><i class="icon-clock"></i>${similarData[key].readyInMinutes}</h6>
       </div>
-      <img id="cardImage" src='${similarData[key].sourceUrl}' alt="">
+      <img id="cardImage" src='https://spoonacular.com/recipeImages/${similarData[key].id}-556x370.jpg' alt="">
   </div>
   <h2 id="cardTitle">${similarData[key].title}</h2>
   <button class="cardButton" id="${similarData[key].id}">Bekijk</button>
 </div>`;
   }
-  document.getElementById("similarRecipes").innerHTML = HTML;
+  document.getElementById("similar").innerHTML = HTML;
   for (let key in similarData) {
     document.getElementById(`${similarData[key].id}`).addEventListener("click", () => {
       localStorage.setItem("idRecipe", similarData[key].id);
@@ -57,7 +59,6 @@ function renderRecipe(data) {
     ingredients += `<li>${data.extendedIngredients[key].name}</li>`
   }
   HTML += `
-  <div id="recipeBackground">
   <div id="recipeBack">
   </div>
   <h2>${data.title}</h2>
@@ -73,7 +74,6 @@ function renderRecipe(data) {
     <ol>
    ${instructions}
    </ol>
-  </div>
   </div>`
   document.getElementById("recipe").innerHTML = HTML;
-}
+} 

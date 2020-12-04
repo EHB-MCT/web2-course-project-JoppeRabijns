@@ -5,13 +5,15 @@ fetchData();
 async function fetchData() {
   let search = localStorage.getItem("search");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=cee7a81c28e441efa3b14a67c611c790&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e24201e68c7a4406a41930950e2aeef2&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
   let data = await response.json();
+  console.log(data);
   addRecipe(data);
+  sort(data);
+  filter(data);
 }
 
 function addRecipe(data) {
-  console.log(data);
   let HTML = "";
   if (data.results == 0) {
     HTML += `<h1>No recipe were found...</h1>`;
@@ -41,4 +43,66 @@ function addRecipe(data) {
       window.location = "./recipeResult.html";
     });
   }
+}
+
+
+function sort(data) {
+  document.getElementById("time").addEventListener("change", () => {
+    data.results.sort(function (a, b) {
+      if (a.readyInMinutes < b.readyInMinutes) {
+        return -1;
+      }
+      if (a.readyInMinutes > b.readyInMinutes) {
+        return 1;
+      }
+      return 0;
+    });
+    addRecipe(data);
+  });
+  document.getElementById("healthScore").addEventListener("change", () => {
+    data.results.sort(function (a, b) {
+      var healthScoreA = a.healthScore; // ignore upper and lowercase
+      var healthScoreB = b.healthScore; // ignore upper and lowercase
+      if (healthScoreA < healthScoreB) {
+        return -1;
+      }
+      if (healthScoreA > healthScoreB) {
+        return 1;
+      }
+      return 0;
+    });
+    addRecipe(data);
+  });
+}
+
+function filter(data) {
+  document.getElementById("vegetarian").addEventListener("change", () => {
+    let x = data.results.filter((a) => {
+      if (a.vegetarian) {
+        return a;
+      }
+    });
+    data.results = x;
+    addRecipe(data);
+  });
+
+  document.getElementById("vegan").addEventListener("change", () => {
+    let x = data.results.filter((a) => {
+      if (a.vegan) {
+        return a;
+      }
+    });
+    data.results = x;
+    addRecipe(data);
+  });
+
+  document.getElementById("fodmap").addEventListener("change", () => {
+    let x = data.results.filter((a) => {
+      if (a.lowFodmap) {
+        return a;
+      }
+    });
+    data.results = x;
+    addRecipe(data);
+  });
 }

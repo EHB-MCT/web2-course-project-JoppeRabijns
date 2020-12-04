@@ -64,7 +64,7 @@ i {
 .icon-clock:before {
     content: "\e900";
     margin-top: 3px;
-    margin-left: 7px;
+    margin-left: 3px;
     float: left;
 }
 
@@ -358,7 +358,9 @@ i {
 }
 
 
-
+#sortFilters {
+    margin-left: 20px;
+}
 
 /* MAP BEGIN*/
 #mapBorder {
@@ -447,6 +449,15 @@ i {
 
 /* MAP END*/
 
+#recipe {
+    width: 55%;
+    margin-top: 20px;
+    border: 2px solid #A2CE2A;
+    background-color: #ffffffab;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 44px;
+    display: inline-block;
+}
 
 #recipeImage {
     margin-left: 40px;
@@ -461,29 +472,27 @@ i {
 }
 
 #recipeIngredients {
-
     width: 30%;
     display: inline-block;
     margin-left: 25px;
 }
 
 #recipe h2 {
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 35px;
     text-align: center;
 }
 
 #recipeInstructions {
+    height: 30vh;
+    overflow: scroll;
     margin-left: 40px;
     width: 70%;
 }
 
-#recipeBackground {
-    margin-top: 20px;
-    border: 2px solid #A2CE2A;
-    background-color: #ffffffab;
-    box-shadow: 0px 3px 6px #00000029;
-    border-radius: 44px;
-}
 
 #recipeBack {
     position: absolute;
@@ -494,5 +503,7 @@ i {
 }
 
 #similar {
+    margin-left: 25px;
+    width: 40%;
     display: inline-block;
 }
