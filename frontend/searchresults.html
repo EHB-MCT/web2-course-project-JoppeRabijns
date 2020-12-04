@@ -28,25 +28,72 @@
   </header>
 
   <main>
+    <form autocomplete="off" id="formResultPage" action="">
+      <input id="formSearchbarResultPage" type="search" placeholder="Ingredients, recipes, …">
+      <div id="formFiltersResultPage">
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-1" type="checkbox" value="DESSERT"><span>DESSERT</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-2" type="checkbox" value="BREAKFAST"><span>BREAKFAST</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-3" type="checkbox" value="BEVERAGE"><span>BEVERAGE</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-4" type="checkbox" value="SNACK"><span>SNACK</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-5" type="checkbox" value="SALAD"><span>SALAD</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-6" type="checkbox" value="SOUP"><span>SOUP</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-7" type="checkbox" value="SIDE DISH"><span>SIDE DISH</span>
+          </label>
+        </div>
+        <div id="formFilterResultPage">
+          <label>
+            <input id="checkbox-8" type="checkbox" value="DRINK"><span>DRINK</span>
+          </label>
+        </div>
+      </div>
+      <input id="formSubmitResultPage" type="submit" value="SEARCH">
+    </form>
     <div id="filterDiv">
       <div id="sortFilters">
         <h3>Sort:</h3>
         <form action="">
           <input type="radio" id="time" name="sort" value="1">
-          <label for="time">time</label><br>
+          <label for="time">COOKING TIME</label><br>
           <input type="radio" id="healthScore" name="sort" value="1">
-          <label for="healthScore">health score</label><br>
-          <hr>
+          <label for="healthScore">HEALTH SCORE</label><br>
+      </div>
+      </form>
+      <div id="filterFilters">
+        <h3>Filter:</h3>
+        <form action="">
           <label><input id="vegetarian" type="radio" name="filter" value="vegetarian">VEGETARIAN</label> <br>
           <label><input id="vegan" type="radio" name="filter" value="vegan">VEGAN</label><br>
           <label><input id="fodmap" type="radio" name="filter" value="fodmap">LOW FODMAP</label>
+        </form>
       </div>
-      <br>
-      </form>
     </div>
-    </div>
-    <div id="searchResults">
-    </div>
+    <div id="searchResults"></div>
   </main>
 
   <script src="./js/searchresults.js"></script>

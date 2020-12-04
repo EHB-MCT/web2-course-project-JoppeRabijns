@@ -143,8 +143,7 @@ i {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: -1;
-
+    z-index: 99;
 }
 
 #formTitle {
@@ -339,7 +338,7 @@ i {
 
 #filterDiv {
     position: absolute;
-    height: 60vh;
+    height: 40vh;
     margin-left: 5vw;
     width: 18vw;
     top: 120px;
@@ -353,14 +352,12 @@ i {
     height: 85vh;
     width: 70vw;
     left: 28vw;
-    top: 120px;
+    top: 170px;
     border-radius: 44px;
 }
 
 
-#sortFilters {
-    margin-left: 20px;
-}
+
 
 /* MAP BEGIN*/
 #mapBorder {
@@ -447,6 +444,9 @@ i {
 
 /* SCROLLBAR END*/
 
+
+
+
 /* MAP END*/
 
 #recipe {
@@ -506,4 +506,157 @@ i {
     margin-left: 25px;
     width: 40%;
     display: inline-block;
+}
+
+
+/* FORM BEGIN */
+#formResultPage {
+    position: absolute;
+    top: 0;
+    bottom: 80vh;
+    left: 28vw;
+    right: 0;
+    display: flex;
+    align-items: center;
+    z-index: -1;
+    width: 70%;
+}
+
+#formTitleResultPage {
+    font: normal normal bold 100px Poppins;
+    text-align: center;
+    margin: 0%;
+}
+
+
+#formSearchbarResultPage {
+    width: 500px;
+    margin-top: 20px;
+    height: 58px;
+    background: #FFFFFF;
+    border: 2px solid #A2CE2A;
+    border-radius: 44px;
+    text-align: center;
+}
+
+#formSearchbarResultPage::placeholder {
+    color: #3131317e;
+    font-size: 14px;
+}
+
+#formSearchbarResultPage:focus {
+    outline: none;
+}
+
+#formSubmitResultPage {
+    margin-top: 20px;
+    width: 200px;
+    height: 58px;
+    border-radius: 44px;
+    font-family: 'Poppins', sans-serif;
+    background: #A2CE2A;
+    border: none;
+    color: #FFFFFF;
+    font: 600 20px/20px Poppins;
+}
+
+#formSubmitResultPage:hover {
+    background: #b7f01b;
+}
+
+#formFiltersResultPage {
+    width: 400px;
+    margin-top: 20px;
+
+}
+
+#formFilterResultPage {
+    float: left;
+    border: 1px solid #9ecc1f;
+    background: #ffffff;
+    border-radius: 44px;
+    font: 14px/21px Poppins;
+    color: #313131;
+    width: 89px;
+    margin-top: 3px;
+    margin-left: 8px;
+}
+
+#formFilterResultPage label span {
+    text-align: center;
+    padding: 3px 0px;
+    display: block;
+    border-radius: 44px;
+}
+
+#formFilterResultPage label input {
+    position: absolute;
+    top: -20px;
+}
+
+#formFilterResultPage input:checked+span {
+    background-color: #A2CE2A;
+    color: #fff;
+}
+
+#formFilterResultPage input:hover+span {
+    background-color: #A2CE2A;
+    color: #fff;
+}
+
+#formName,
+#formDescription,
+#formLongitude,
+#formLatitude {
+    width: 30vw;
+    height: 30px;
+    margin-top: 10px;
+    background: #FFFFFF;
+    border: 2px solid #A2CE2A;
+    border-radius: 44px;
+    text-align: center;
+}
+
+
+/* FORM END */
+
+#sortFilters,
+#filterFilters {
+    margin-left: 20px;
+}
+
+#sortFilters input[type="radio"],
+#filterFilters input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+#sortFilters label,
+#filterFilters label {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    display: inline-block;
+    padding: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #A2CE2A;
+    border-radius: 44px;
+}
+
+#sortFilters label:hover,
+#filterFilters label:hover {
+    background-color: #A2CE2A;
+    color: white;
+}
+
+#sortFilters input[type="radio"]:focus+label,
+#filterFilters input[type="radio"]:focus+label {
+    color: #ffffff;
+}
+
+#sortFilters input[type="radio"]:checked+label,
+#filterFilters input[type="radio"]:checked+label {
+    background-color: #A2CE2A;
+    color: #ffffff;
 }

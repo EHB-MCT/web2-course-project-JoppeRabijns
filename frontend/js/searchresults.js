@@ -5,7 +5,7 @@ fetchData();
 async function fetchData() {
   let search = localStorage.getItem("search");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e24201e68c7a4406a41930950e2aeef2&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=cee7a81c28e441efa3b14a67c611c790&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
   let data = await response.json();
   console.log(data);
   addRecipe(data);
@@ -43,6 +43,7 @@ function addRecipe(data) {
       window.location = "./recipeResult.html";
     });
   }
+
 }
 
 
@@ -77,32 +78,58 @@ function sort(data) {
 
 function filter(data) {
   document.getElementById("vegetarian").addEventListener("change", () => {
-    let x = data.results.filter((a) => {
+    let filterData = data.results.filter((a) => {
       if (a.vegetarian) {
         return a;
       }
     });
-    data.results = x;
+    data.results = filterData;
     addRecipe(data);
   });
 
   document.getElementById("vegan").addEventListener("change", () => {
-    let x = data.results.filter((a) => {
+    let filterData = data.results.filter((a) => {
       if (a.vegan) {
         return a;
       }
     });
-    data.results = x;
+    data.results = filterData;
     addRecipe(data);
   });
 
   document.getElementById("fodmap").addEventListener("change", () => {
-    let x = data.results.filter((a) => {
+    let filterData = data.results.filter((a) => {
       if (a.lowFodmap) {
         return a;
       }
     });
-    data.results = x;
+    data.results = filterData;
     addRecipe(data);
   });
+}
+
+
+document.getElementById("formResultPage").addEventListener("submit", (event) => {
+
+  event.preventDefault();
+  let typeString = "";
+  for (let i = 1; i < 9; i++) {
+    let type = document.getElementById('checkbox-' + [i]);
+    var isChecked = type.checked;
+    if (isChecked) {
+      typeString += type.value;
+      typeString += ",";
+    }
+  }
+  let search = document.getElementById("formSearchbarResultPage").value;
+  addToLocalstorage(search, typeString);
+  window.location = "./searchresults.html";
+});
+
+function addToLocalstorage(search, typeString) {
+  if (typeof (Storage) !== "undefined") {
+    window.localStorage.clear();
+    localStorage.setItem("search", search);
+    localStorage.setItem("types", typeString);
+  }
 }
