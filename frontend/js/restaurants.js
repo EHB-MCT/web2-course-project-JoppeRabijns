@@ -41,7 +41,7 @@ function createMarkers(data) {
         .setLngLat([data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]])
         .setPopup(new mapboxgl.Popup({
           anchor: 'top'
-        }).setHTML(`<h4 id="popup">${data[key].properties.name}</h4>`)) // add popup
+        }).setHTML(`<div id="popup"><h4>${data[key].properties.name}<h6>${data[key].properties.address}</h6></div>`)) // add popup
         .addTo(map);
     }
   }
@@ -56,8 +56,7 @@ function createRestaurantList(data) {
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
     restaurant.id = "restaurant-" + restaurantData.id;
-    let link = restaurant.appendChild(document.createElement('a'));
-    link.href = '#';
+    let link = restaurant.appendChild(document.createElement('h4'));
     link.className = 'title';
     restaurant.addEventListener("click", () => {
       map.flyTo({

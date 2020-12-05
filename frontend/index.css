@@ -418,6 +418,12 @@ i {
     text-align: center;
 }
 
+#popup h6,
+#popup h4 {
+    margin: 0;
+    padding: 0;
+}
+
 .restaurantStyle {
     border: 2px solid #A2CE2A;
     margin-bottom: 10px;
@@ -427,7 +433,13 @@ i {
     overflow-y: visible;
 }
 
+.restaurantStyle:hover {
+    background-color: #f2f8e1;
+    cursor: pointer;
+}
+
 #restaurants .title {
+    margin: 0;
     color: #A2CE2A;
     font-weight: 600;
     text-decoration: none;
