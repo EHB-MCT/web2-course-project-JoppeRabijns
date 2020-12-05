@@ -28,7 +28,7 @@
   width: 100%;
   min-width: 240px;
   z-index: 1;
-  border: 2px solid #A2CE2A;    
+  border: 2px solid #A2CE2A;
   border-radius: 25px;
 }
 
@@ -220,4 +220,11 @@
 
 .mapboxgl-popup-anchor-top>.mapboxgl-popup-content {
   margin-top: 1px;
+}
+
+.mapboxgl-ctrl-group {
+  position: absolute;
+  z-index: 999;
+  right: 15px;
+  top: 14px;
 }

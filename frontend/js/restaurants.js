@@ -1,6 +1,6 @@
 'use strict';
-
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9wcGVyYWJpam5zIiwiYSI6ImNqNnl0dWxpNDJmeDEyeG10cWV0cnloczQifQ.YSoKiZUOwUPNMWbSPHBFbA';
+
 var map = new mapboxgl.Map({
   container: 'map',
   center: [4.7005176, 50.8798438],
@@ -14,11 +14,17 @@ var geocoder = new MapboxGeocoder({
   marker: true,
   types: 'place,postcode',
   countries: 'BE',
-  placeholder: 'Your location',
+  placeholder: 'Enter a city',
   zoom: 13
 });
 
 map.addControl(geocoder, 'top-right');
+map.addControl(new mapboxgl.GeolocateControl({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+  trackUserLocation: true
+}));
 
 fetchData();
 
