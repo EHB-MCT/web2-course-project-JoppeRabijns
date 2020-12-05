@@ -1,5 +1,4 @@
 'use strict';
-
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9wcGVyYWJpam5zIiwiYSI6ImNqNnl0dWxpNDJmeDEyeG10cWV0cnloczQifQ.YSoKiZUOwUPNMWbSPHBFbA';
 var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
@@ -36,8 +35,20 @@ geocoder.on('result', function (e) {
       event.preventDefault();
     } else {
       event.preventDefault();
-      formTitle.innerHTML = "Restaurant added!";
       postData(restaurantData);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Added restaurant successfully'
+      });
+
       setTimeout(function () {
         window.location = "./restaurants.html";
       }, 2500);
