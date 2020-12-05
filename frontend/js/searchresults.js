@@ -5,21 +5,20 @@ fetchData();
 async function fetchData() {
   let search = localStorage.getItem("search");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=cee7a81c28e441efa3b14a67c611c790&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4a31bb9bef354a4ba47d51cddc71c430&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
   let data = await response.json();
-  console.log(data);
-  addRecipe(data);
+  addRecipe(data.results);
   sort(data);
   filter(data);
 }
 
 function addRecipe(data) {
   let HTML = "";
-  if (data.results == 0) {
-    HTML += `<h1>No recipe were found...</h1>`;
+  if (data == 0) {
+    HTML += `<h1>No recipes were found...</h1>`;
     document.getElementById("searchResults").innerHTML = HTML;
   } else {
-    for (let key in data.results) {
+    for (let key in data) {
       HTML += `<div id="card">
     <div id="cardImageDiv">
     <i class="icon-heart"></i>
@@ -27,23 +26,22 @@ function addRecipe(data) {
             <h6 id="cardInfoText"><i class="icon-star"></i>4.0</h6>
         </div>
         <div id="cardInfoTime">
-            <h6 id="cardInfoText"><i class="icon-clock"></i>${data.results[key].readyInMinutes}</h6>
+            <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
         </div>
-        <img id="cardImage" src="${data.results[key].image}" alt="">
+        <img id="cardImage" src="${data[key].image}" alt="">
     </div>
-    <h2 id="cardTitle">${data.results[key].title}</h2>
-    <button class="cardButton" id="${data.results[key].id}">Bekijk</button>
+    <h2 id="cardTitle">${data[key].title}</h2>
+    <button class="cardButton" id="${data[key].id}">Bekijk</button>
   </div>`;
     }
   }
   document.getElementById("searchResults").innerHTML = HTML;
-  for (let key in data.results) {
-    document.getElementById(`${data.results[key].id}`).addEventListener("click", () => {
-      localStorage.setItem("idRecipe", data.results[key].id);
+  for (let key in data) {
+    document.getElementById(`${data[key].id}`).addEventListener("click", () => {
+      localStorage.setItem("idRecipe", data[key].id);
       window.location = "./recipeResult.html";
     });
   }
-
 }
 
 
@@ -58,59 +56,62 @@ function sort(data) {
       }
       return 0;
     });
-    addRecipe(data);
+    addRecipe(data.results);
   });
   document.getElementById("healthScore").addEventListener("change", () => {
     data.results.sort(function (a, b) {
-      var healthScoreA = a.healthScore; // ignore upper and lowercase
-      var healthScoreB = b.healthScore; // ignore upper and lowercase
-      if (healthScoreA < healthScoreB) {
+      if (a.healthScore < b.healthScore) {
         return -1;
       }
-      if (healthScoreA > healthScoreB) {
+      if (a.healthScore > b.healthScore) {
         return 1;
       }
       return 0;
     });
-    addRecipe(data);
+    addRecipe(data.results);
   });
 }
 
 function filter(data) {
   document.getElementById("vegetarian").addEventListener("change", () => {
-    let filterData = data.results.filter((a) => {
+    let testData = [];
+    testData.push(data.results);
+    let filterData = testData[0].filter((a) => {
       if (a.vegetarian) {
+        console.log("true");
         return a;
       }
     });
-    data.results = filterData;
-    addRecipe(data);
+    addRecipe(filterData);
   });
 
   document.getElementById("vegan").addEventListener("change", () => {
-    let filterData = data.results.filter((a) => {
+    let testData = [];
+    testData.push(data.results);
+    let filterData = testData[0].filter((a) => {
       if (a.vegan) {
+        console.log("true");
         return a;
       }
     });
-    data.results = filterData;
-    addRecipe(data);
+    addRecipe(filterData);
   });
 
   document.getElementById("fodmap").addEventListener("change", () => {
-    let filterData = data.results.filter((a) => {
+    let testData = [];
+    testData.push(data.results);
+    let filterData = testData[0].filter((a) => {
       if (a.lowFodmap) {
+        console.log("true");
         return a;
       }
     });
-    data.results = filterData;
-    addRecipe(data);
+    addRecipe(filterData);
   });
 }
 
 
 document.getElementById("formResultPage").addEventListener("submit", (event) => {
-
   event.preventDefault();
   let typeString = "";
   for (let i = 1; i < 9; i++) {

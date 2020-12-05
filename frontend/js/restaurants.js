@@ -12,7 +12,7 @@ var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   mapboxgl: mapboxgl,
   marker: true,
-  types: 'place,postcode,address,poi',
+  types: 'place,postcode',
   countries: 'BE',
   placeholder: 'Your location',
   zoom: 13
@@ -39,6 +39,9 @@ function createMarkers(data) {
           anchor: 'bottom'
         })
         .setLngLat([data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]])
+        .setPopup(new mapboxgl.Popup({
+          anchor: 'top'
+        }).setHTML(`<h4 id="popup">${data[key].properties.name}</h4>`)) // add popup
         .addTo(map);
     }
   }
@@ -46,6 +49,8 @@ function createMarkers(data) {
 
 function createRestaurantList(data) {
   for (let key in data) {
+    let long = data[key].geometry.coordinates[1];
+    let lang = data[key].geometry.coordinates[0];
     let restaurantData = data[key].properties;
     var restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
@@ -54,6 +59,12 @@ function createRestaurantList(data) {
     let link = restaurant.appendChild(document.createElement('a'));
     link.href = '#';
     link.className = 'title';
+    restaurant.addEventListener("click", () => {
+      map.flyTo({
+        center: [long, lang],
+        zoom: 17
+      })
+    })
     link.innerHTML = restaurantData.name;
     link.id = "link-" + restaurantData.id;
     let details = restaurant.appendChild(document.createElement('h4'));
