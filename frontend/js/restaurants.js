@@ -8,28 +8,79 @@ var map = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/light-v10'
 });
 
+fetchData();
+
+async function fetchData() {
+  let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants');
+  let data = await response.json();
+  createMarkers(data);
+  createRestaurantList(data);
+  sortOnLocationGeocoder(data);
+  sortOnLocationGeolocation(data);
+}
+
+
 var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   mapboxgl: mapboxgl,
   marker: true,
   types: 'place,postcode',
   countries: 'BE',
-  placeholder: 'Enter a city',
-  zoom: 13
+  placeholder: 'Enter a city'
 });
 
 map.addControl(geocoder, 'top-right');
 
 
-let geolocate = map.addControl(new mapboxgl.GeolocateControl({
+let geolocate = new mapboxgl.GeolocateControl({
   positionOptions: {
-    enableHighAccuracy: true
+    enableHighAccuracy: true,
+    watchPosition: true
   },
   trackUserLocation: true
-}));
+});
+map.addControl(geolocate);
 
 
-function sortOnLocation(data) {
+function sortOnLocationGeolocation(data) {
+  geolocate.on('geolocate', function (ev) {
+    console.log(ev);
+    var searchResult = [ev.coords.latitude, ev.coords.longitude];
+    console.log(searchResult);
+    var options = {
+      units: 'kilometers'
+    };
+    data.forEach(function (restaurantData) {
+      let coordinates = [restaurantData.geometry.coordinates[0], restaurantData.geometry.coordinates[1]];
+      Object.defineProperty(restaurantData.properties, 'distance', {
+        value: turf.distance(coordinates, searchResult, options),
+        writable: true,
+        enumerable: true,
+        configurable: true
+      })
+    });
+
+    data.sort(function (a, b) {
+      if (a.properties.distance > b.properties.distance) {
+        return 1;
+
+      }
+      if (a.properties.distance < b.properties.distance) {
+        return -1;
+      }
+      return 0;
+    });
+
+    var sortedRestaurants = document.getElementById('restaurants');
+    while (sortedRestaurants.firstChild) {
+      sortedRestaurants.removeChild(sortedRestaurants.firstChild);
+    }
+
+    createRestaurantList(data);
+  });
+}
+
+function sortOnLocationGeocoder(data) {
   console.log(data);
   geocoder.on('result', function (ev) {
     var searchResult = ev.result.geometry;
@@ -58,7 +109,6 @@ function sortOnLocation(data) {
       return 0;
     });
 
-
     var sortedRestaurants = document.getElementById('restaurants');
     while (sortedRestaurants.firstChild) {
       sortedRestaurants.removeChild(sortedRestaurants.firstChild);
@@ -69,23 +119,12 @@ function sortOnLocation(data) {
 }
 
 
-fetchData();
-
-async function fetchData() {
-  let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants');
-  let data = await response.json();
-  createMarkers(data);
-  createRestaurantList(data);
-  sortOnLocation(data);
-}
-
 
 function createMarkers(data) {
   for (let key in data) {
     if (data.hasOwnProperty(key)) {
       let logo = document.createElement('div');
       logo.className = 'marker';
-      logo.id = data[key].geometry.coordinates[1];
       let marker = new mapboxgl.Marker(logo, {
           anchor: 'bottom'
         })
@@ -95,13 +134,14 @@ function createMarkers(data) {
         }).setHTML(`<div id="popup"><h4>${data[key].properties.name}<h6>${data[key].properties.address}</h6></div>`)) // add popup
         .addTo(map);
     }
-    /* document.getElementById(data[key].geometry.coordinates[1]).addEventListener('click', function () {
-      map.flyTo({
-        center: [data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]],
-        essential: true,
-        zoom: 16
-      });
-    }); */
+    /*   document.getElementById(data[key].geometry.coordinates[1]).addEventListener('click', function () {
+        console.log(data[key]._id);
+        map.flyTo({
+          center: [data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]],
+          essential: true,
+          zoom: 16
+        });
+      }); */
   }
 }
 
@@ -138,7 +178,7 @@ function createRestaurantList(data) {
       distance.removeChild(distance.firstChild);
       distance.style.display = "none";
     } else {
-      distance.innerHTML = parseFloat(restaurantData.distance).toFixed(2) + " km";
+      distance.innerHTML = parseFloat(restaurantData.distance).toFixed(1) + " km";
     }
   }
 }
