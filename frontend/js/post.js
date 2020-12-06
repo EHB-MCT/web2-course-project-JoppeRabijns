@@ -57,12 +57,11 @@ geocoder.on('result', function (e) {
 });
 
 async function postData(restaurantData) {
-  let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants', {
+  await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(restaurantData)
   });
-  let data = await response.json();
 }

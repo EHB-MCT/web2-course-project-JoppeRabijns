@@ -22,9 +22,6 @@ function addRecipe(data) {
       HTML += `<div id="card">
     <div id="cardImageDiv">
     <i class="icon-heart"></i>
-        <div id="cardInfoStars">
-            <h6 id="cardInfoText"><i class="icon-star"></i>4.0</h6>
-        </div>
         <div id="cardInfoTime">
             <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
         </div>

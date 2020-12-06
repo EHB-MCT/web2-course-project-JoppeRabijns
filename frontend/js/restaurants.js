@@ -19,12 +19,55 @@ var geocoder = new MapboxGeocoder({
 });
 
 map.addControl(geocoder, 'top-right');
-map.addControl(new mapboxgl.GeolocateControl({
+
+
+let geolocate = map.addControl(new mapboxgl.GeolocateControl({
   positionOptions: {
     enableHighAccuracy: true
   },
   trackUserLocation: true
 }));
+
+
+function sortOnLocation(data) {
+  console.log(data);
+  geocoder.on('result', function (ev) {
+    var searchResult = ev.result.geometry;
+    console.log(searchResult);
+    var options = {
+      units: 'kilometers'
+    };
+    data.forEach(function (restaurantData) {
+      let coordinates = [restaurantData.geometry.coordinates[1], restaurantData.geometry.coordinates[0]];
+      Object.defineProperty(restaurantData.properties, 'distance', {
+        value: turf.distance(coordinates, searchResult, options),
+        writable: true,
+        enumerable: true,
+        configurable: true
+      })
+    });
+
+    data.sort(function (a, b) {
+      if (a.properties.distance > b.properties.distance) {
+        return 1;
+
+      }
+      if (a.properties.distance < b.properties.distance) {
+        return -1;
+      }
+      return 0;
+    });
+
+
+    var sortedRestaurants = document.getElementById('restaurants');
+    while (sortedRestaurants.firstChild) {
+      sortedRestaurants.removeChild(sortedRestaurants.firstChild);
+    }
+
+    createRestaurantList(data);
+  });
+}
+
 
 fetchData();
 
@@ -33,6 +76,7 @@ async function fetchData() {
   let data = await response.json();
   createMarkers(data);
   createRestaurantList(data);
+  sortOnLocation(data);
 }
 
 
@@ -41,6 +85,7 @@ function createMarkers(data) {
     if (data.hasOwnProperty(key)) {
       let logo = document.createElement('div');
       logo.className = 'marker';
+      logo.id = data[key].geometry.coordinates[1];
       let marker = new mapboxgl.Marker(logo, {
           anchor: 'bottom'
         })
@@ -50,6 +95,13 @@ function createMarkers(data) {
         }).setHTML(`<div id="popup"><h4>${data[key].properties.name}<h6>${data[key].properties.address}</h6></div>`)) // add popup
         .addTo(map);
     }
+    /* document.getElementById(data[key].geometry.coordinates[1]).addEventListener('click', function () {
+      map.flyTo({
+        center: [data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]],
+        essential: true,
+        zoom: 16
+      });
+    }); */
   }
 }
 
@@ -61,7 +113,7 @@ function createRestaurantList(data) {
     var restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
-    restaurant.id = "restaurant-" + restaurantData.id;
+    restaurant.id = data[key].geometry.coordinates[1];
     let link = restaurant.appendChild(document.createElement('h4'));
     link.className = 'title';
     restaurant.addEventListener("click", () => {
@@ -69,15 +121,24 @@ function createRestaurantList(data) {
         center: [long, lang],
         zoom: 17
       })
-    })
+    });
     link.innerHTML = restaurantData.name;
-    link.id = "link-" + restaurantData.id;
     let details = restaurant.appendChild(document.createElement('h4'));
     details.className = 'description';
     details.innerHTML = restaurantData.description;
     let address = restaurant.appendChild(document.createElement('h6'));
     address.className = 'address';
     address.innerHTML = restaurantData.address;
-  }
+    let distance = restaurant.appendChild(document.createElement('h6'));
 
+    //distance
+    distance.innerHTML = restaurantData.distance;
+    distance.className = 'distance';
+    if (distance.innerHTML == "undefined") {
+      distance.removeChild(distance.firstChild);
+      distance.style.display = "none";
+    } else {
+      distance.innerHTML = parseFloat(restaurantData.distance).toFixed(2) + " km";
+    }
+  }
 }
