@@ -5,7 +5,7 @@ fetchData();
 async function fetchData() {
   let search = localStorage.getItem("search");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4a31bb9bef354a4ba47d51cddc71c430&intolerances=gluten&number=8&query=${search}&addRecipeInformation=true&type=${types}`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4a31bb9bef354a4ba47d51cddc71c430&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`);
   let data = await response.json();
   addRecipe(data.results);
   sort(data);
