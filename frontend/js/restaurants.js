@@ -8,15 +8,35 @@ var map = new mapboxgl.Map({
   style: 'mapbox://styles/mapbox/light-v10'
 });
 
+function showLoader() {
+  document.getElementById("loader").style.display = "block";
+}
+
+function hideLoader() {
+  document.getElementById("loader").style.display = "none";
+}
+
 fetchData();
 
 async function fetchData() {
+  showLoader()
   let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants');
   let data = await response.json();
   createMarkers(data);
   createRestaurantList(data);
   sortOnLocationGeocoder(data);
   sortOnLocationGeolocation(data);
+  hideLoader();
+}
+
+function loadData() {
+
+  fetch('https://randomuser.me/api/')
+    .then(response => response.json())
+    .then(data => {
+      // hideSpinner()
+      console.log(data)
+    });
 }
 
 
