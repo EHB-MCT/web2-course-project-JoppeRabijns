@@ -94,6 +94,10 @@ i {
 
 /* ICONMOON END*/
 
+
+/* LOGIN */
+
+
 /* NAV BEGIN */
 #logoBackground {
     background-color: #A2CE2A;
@@ -540,12 +544,24 @@ i {
     border-radius: 40px 0px 15px 0px;
 }
 
-#similar {
-    margin-left: 25px;
-    width: 40%;
+
+#similarRecipes {
     display: inline-block;
+    width: 40%;
+    vertical-align: top;
 }
 
+#similar {
+    margin-left: 25px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40% 40%;
+}
+
+#similar #card {
+    width: 100%;
+    margin-right: 20px;
+}
 
 /* FORM BEGIN */
 #formResultPage {

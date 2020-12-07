@@ -10,7 +10,6 @@ async function fetchData() {
 
 }
 
-
 async function fetchSimilarData() {
   let idRecipe = localStorage.getItem("idRecipe");
   let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=cee7a81c28e441efa3b14a67c611c790&number=4`);
@@ -25,9 +24,6 @@ function renderSimilarRecipes(similarData) {
     HTML += `<div id="card">
   <div id="cardImageDiv">
   <i class="icon-heart"></i>
-      <div id="cardInfoStars">
-          <h6 id="cardInfoText"><i class="icon-star"></i>4.0</h6>
-      </div>
       <div id="cardInfoTime">
           <h6 id="cardInfoText"><i class="icon-clock"></i>${similarData[key].readyInMinutes}</h6>
       </div>
@@ -45,7 +41,6 @@ function renderSimilarRecipes(similarData) {
     });
   }
 }
-
 
 
 function renderRecipe(data) {
@@ -76,4 +71,4 @@ function renderRecipe(data) {
    </ol>
   </div>`
   document.getElementById("recipe").innerHTML = HTML;
-} 
+}

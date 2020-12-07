@@ -19,13 +19,12 @@ function hideLoader() {
 fetchData();
 
 async function fetchData() {
-  showLoader()
-  let response = await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants');
-  let data = await response.json();
-  createMarkers(data);
-  createRestaurantList(data);
-  sortOnLocationGeocoder(data);
-  sortOnLocationGeolocation(data);
+  showLoader();
+  await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants')
+    .then(response => response.json())
+    .then(data => {
+      createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data)
+    });
   hideLoader();
 }
 
