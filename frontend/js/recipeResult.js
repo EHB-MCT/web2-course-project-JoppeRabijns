@@ -37,7 +37,7 @@ function renderSimilarRecipes(similarData) {
   for (let key in similarData) {
     document.getElementById(`${similarData[key].id}`).addEventListener("click", () => {
       localStorage.setItem("idRecipe", similarData[key].id);
-      window.location = "./recipeResult.html";
+      location.reload();
     });
   }
 }

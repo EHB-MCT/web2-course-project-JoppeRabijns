@@ -4,14 +4,26 @@ fetchData();
 
 async function fetchData() {
   showLoader();
-  let search = localStorage.getItem("search");
-  let types = localStorage.getItem("types");
-  await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=b19c72e55d624db89ca25f0b25b9e63b&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
-    .then(response => response.json())
-    .then(data => {
-      addRecipe(data.results), sort(data), filter(data)
+  try {
+    let search = localStorage.getItem("search");
+    let types = localStorage.getItem("types");
+    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
+      .then(response => response.json())
+      .then(data => {
+        addRecipe(data.results), sort(data), filter(data)
+      })
+    hideLoader();
+  } catch (err) {
+    hideLoader();
+    const error = Swal.mixin({
+      position: 'center',
+      showConfirmButton: true,
     });
-  hideLoader();
+    error.fire({
+      icon: 'error',
+      title: 'Daily api call limit reached!'
+    });
+  }
 }
 
 function showLoader() {

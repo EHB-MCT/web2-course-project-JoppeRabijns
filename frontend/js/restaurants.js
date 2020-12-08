@@ -23,8 +23,9 @@ async function fetchData() {
   await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants')
     .then(response => response.json())
     .then(data => {
-      createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data), hideLoader();
+      createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data)
     });
+  hideLoader();
 }
 
 let geocoder = new MapboxGeocoder({
@@ -115,12 +116,9 @@ function sortOnLocationGeocoder(data) {
     while (sortedRestaurants.firstChild) {
       sortedRestaurants.removeChild(sortedRestaurants.firstChild);
     }
-
     createRestaurantList(data);
   });
 }
-
-
 
 function createMarkers(data) {
   for (let key in data) {
@@ -163,7 +161,7 @@ function createRestaurantList(data) {
     restaurant.addEventListener("click", () => {
       map.flyTo({
         center: [long, lang],
-        zoom: 17
+        zoom: 16
       })
     });
     link.innerHTML = restaurantData.name;
