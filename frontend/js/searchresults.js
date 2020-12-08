@@ -3,18 +3,29 @@
 fetchData();
 
 async function fetchData() {
+  showLoader();
   let search = localStorage.getItem("search");
   let types = localStorage.getItem("types");
-  let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=4a31bb9bef354a4ba47d51cddc71c430&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`);
-  let data = await response.json();
-  addRecipe(data.results);
-  sort(data);
-  filter(data);
+  await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=b19c72e55d624db89ca25f0b25b9e63b&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
+    .then(response => response.json())
+    .then(data => {
+      addRecipe(data.results), sort(data), filter(data)
+    });
+  hideLoader();
 }
+
+function showLoader() {
+  document.getElementById("loader").style.display = "block";
+}
+
+function hideLoader() {
+  document.getElementById("loader").style.display = "none";
+}
+
 
 function addRecipe(data) {
   let HTML = "";
-  if (data == 0) {
+  if (data.length === 0) {
     HTML += `<h1>No recipes were found...</h1>`;
     document.getElementById("searchResults").innerHTML = HTML;
   } else {
@@ -75,7 +86,6 @@ function filter(data) {
     testData.push(data.results);
     let filterData = testData[0].filter((a) => {
       if (a.vegetarian) {
-        console.log("true");
         return a;
       }
     });
@@ -87,7 +97,6 @@ function filter(data) {
     testData.push(data.results);
     let filterData = testData[0].filter((a) => {
       if (a.vegan) {
-        console.log("true");
         return a;
       }
     });
@@ -99,7 +108,17 @@ function filter(data) {
     testData.push(data.results);
     let filterData = testData[0].filter((a) => {
       if (a.lowFodmap) {
-        console.log("true");
+        return a;
+      }
+    });
+    addRecipe(filterData);
+  });
+
+  document.getElementById("all").addEventListener("change", () => {
+    let testData = [];
+    testData.push(data.results);
+    let filterData = testData[0].filter((a) => {
+      if (a) {
         return a;
       }
     });
@@ -113,15 +132,14 @@ document.getElementById("formResultPage").addEventListener("submit", (event) => 
   let typeString = "";
   for (let i = 1; i < 9; i++) {
     let type = document.getElementById('checkbox-' + [i]);
-    var isChecked = type.checked;
-    if (isChecked) {
+    if (type.checked) {
       typeString += type.value;
       typeString += ",";
     }
   }
   let search = document.getElementById("formSearchbarResultPage").value;
   addToLocalstorage(search, typeString);
-  window.location = "./searchresults.html";
+  location.reload();
 });
 
 function addToLocalstorage(search, typeString) {

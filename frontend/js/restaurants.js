@@ -23,23 +23,11 @@ async function fetchData() {
   await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants')
     .then(response => response.json())
     .then(data => {
-      createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data)
-    });
-  hideLoader();
-}
-
-function loadData() {
-
-  fetch('https://randomuser.me/api/')
-    .then(response => response.json())
-    .then(data => {
-      // hideSpinner()
-      console.log(data)
+      createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data), hideLoader();
     });
 }
 
-
-var geocoder = new MapboxGeocoder({
+let geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
   mapboxgl: mapboxgl,
   marker: true,
@@ -47,7 +35,6 @@ var geocoder = new MapboxGeocoder({
   countries: 'BE',
   placeholder: 'Enter a city'
 });
-
 map.addControl(geocoder, 'top-right');
 
 
@@ -63,10 +50,8 @@ map.addControl(geolocate);
 
 function sortOnLocationGeolocation(data) {
   geolocate.on('geolocate', function (ev) {
-    console.log(ev);
-    var searchResult = [ev.coords.latitude, ev.coords.longitude];
-    console.log(searchResult);
-    var options = {
+    let searchResult = [ev.coords.latitude, ev.coords.longitude];
+    let options = {
       units: 'kilometers'
     };
     data.forEach(function (restaurantData) {
@@ -90,7 +75,7 @@ function sortOnLocationGeolocation(data) {
       return 0;
     });
 
-    var sortedRestaurants = document.getElementById('restaurants');
+    let sortedRestaurants = document.getElementById('restaurants');
     while (sortedRestaurants.firstChild) {
       sortedRestaurants.removeChild(sortedRestaurants.firstChild);
     }
@@ -100,11 +85,9 @@ function sortOnLocationGeolocation(data) {
 }
 
 function sortOnLocationGeocoder(data) {
-  console.log(data);
   geocoder.on('result', function (ev) {
-    var searchResult = ev.result.geometry;
-    console.log(searchResult);
-    var options = {
+    let searchResult = ev.result.geometry;
+    let options = {
       units: 'kilometers'
     };
     data.forEach(function (restaurantData) {
@@ -128,7 +111,7 @@ function sortOnLocationGeocoder(data) {
       return 0;
     });
 
-    var sortedRestaurants = document.getElementById('restaurants');
+    let sortedRestaurants = document.getElementById('restaurants');
     while (sortedRestaurants.firstChild) {
       sortedRestaurants.removeChild(sortedRestaurants.firstChild);
     }
@@ -144,6 +127,8 @@ function createMarkers(data) {
     if (data.hasOwnProperty(key)) {
       let logo = document.createElement('div');
       logo.className = 'marker';
+      logo.id = data[key]._id;
+      logo.coordinates = [data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]];
       let marker = new mapboxgl.Marker(logo, {
           anchor: 'bottom'
         })
@@ -152,15 +137,15 @@ function createMarkers(data) {
           anchor: 'top'
         }).setHTML(`<div id="popup"><h4>${data[key].properties.name}<h6>${data[key].properties.address}</h6></div>`)) // add popup
         .addTo(map);
-    }
-    /*   document.getElementById(data[key].geometry.coordinates[1]).addEventListener('click', function () {
-        console.log(data[key]._id);
+      document.getElementById(logo.id).addEventListener("click", () => {
+        console.log(logo.id);
         map.flyTo({
-          center: [data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]],
+          center: logo.coordinates,
           essential: true,
           zoom: 16
         });
-      }); */
+      });
+    }
   }
 }
 
@@ -169,7 +154,7 @@ function createRestaurantList(data) {
     let long = data[key].geometry.coordinates[1];
     let lang = data[key].geometry.coordinates[0];
     let restaurantData = data[key].properties;
-    var restaurants = document.getElementById('restaurants');
+    let restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
     restaurant.id = data[key].geometry.coordinates[1];
@@ -188,9 +173,9 @@ function createRestaurantList(data) {
     let address = restaurant.appendChild(document.createElement('h6'));
     address.className = 'address';
     address.innerHTML = restaurantData.address;
-    let distance = restaurant.appendChild(document.createElement('h6'));
 
     //distance
+    let distance = restaurant.appendChild(document.createElement('h6'));
     distance.innerHTML = restaurantData.distance;
     distance.className = 'distance';
     if (distance.innerHTML == "undefined") {

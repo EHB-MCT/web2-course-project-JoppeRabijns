@@ -47,9 +47,14 @@ function renderRecipe(data) {
   let ingredients = ``;
   let instructions = ``;
   let HTML = ``;
-  for (let key in data.analyzedInstructions[0].steps) {
-    instructions += `<li>${data.analyzedInstructions[0].steps[key].step}</li>`
+  if (data.analyzedInstructions[0] !== undefined) {
+    for (let key in data.analyzedInstructions[0].steps) {
+      instructions += `<li>${data.analyzedInstructions[0].steps[key].step}</li>`
+    }
+  } else {
+    instructions += `<h4>There are no instructions found...<h4>`
   }
+
   for (let key in data.extendedIngredients) {
     ingredients += `<li>${data.extendedIngredients[key].name}</li>`
   }

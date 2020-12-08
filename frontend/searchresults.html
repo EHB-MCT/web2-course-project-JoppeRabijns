@@ -13,7 +13,6 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="./index.css">
-  <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
@@ -95,6 +94,8 @@
       <div id="filterFilters">
         <h3>Filter:</h3>
         <form action="">
+          <input id="all" type="radio" name="filter" checked value="all">
+          <label id="all" for="all">All</label>
           <input id="vegetarian" type="radio" name="filter" value="vegetarian">
           <label for="vegetarian">Vegetarian</label> <br>
           <input id="vegan" type="radio" name="filter" value="vegan">
@@ -104,6 +105,7 @@
         </form>
       </div>
     </div>
+    <div id="loader"></div>
     <div id="searchResults"></div>
   </main>
 

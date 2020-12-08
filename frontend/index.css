@@ -346,10 +346,11 @@ i {
 
 #filterDiv {
     position: absolute;
-    height: 42vh;
+    height: auto;
     margin-left: 5vw;
     width: 18vw;
     top: 120px;
+    padding-bottom: 30px;
     background-color: #fff;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 15px;
@@ -472,6 +473,34 @@ i {
     z-index: 99;
 }
 
+#loader {
+    display: none;
+    width: 40px;
+    height: 40px;
+    stroke-linecap: round;
+    border: 4px solid #f3f3f3;
+    border-top: 5px solid #A2CE2A;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* SCROLLBAR BEGIN */
 
 ::-webkit-scrollbar {
@@ -493,17 +522,20 @@ i {
 
 #recipe {
     width: 55%;
+    overflow: hidden;
+    height: 80vh;
     margin-top: 20px;
     border: 2px solid #A2CE2A;
     background-color: #ffffffab;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 44px;
     display: inline-block;
+
 }
 
 #recipeImage {
     margin-left: 40px;
-    width: 40%;
+    width: 60%;
     border-radius: 44px;
     overflow: hidden;
     display: inline-block;
@@ -511,12 +543,14 @@ i {
 
 #recipeImage img {
     width: 100%;
+    vertical-align: top;
 }
 
 #recipeIngredients {
     width: 30%;
     display: inline-block;
     margin-left: 25px;
+    vertical-align: top;
 }
 
 #recipe h2 {
@@ -529,10 +563,14 @@ i {
 }
 
 #recipeInstructions {
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+#recipeInstructions ol {
     height: 30vh;
     overflow: scroll;
-    margin-left: 40px;
-    width: 70%;
+    width: 80%;
 }
 
 
@@ -546,6 +584,7 @@ i {
 
 
 #similarRecipes {
+    margin-top: 20px;
     display: inline-block;
     width: 40%;
     vertical-align: top;
@@ -678,7 +717,7 @@ i {
 
 #sortFilters h3,
 #filterFilters h3 {
-    margin-left: 20px;
+    margin-left: 25px;
 }
 
 #sortFilters form,
@@ -706,6 +745,10 @@ i {
     border-radius: 44px;
 }
 
+#all {
+    margin-bottom: 20px;
+}
+
 #sortFilters label:hover,
 #filterFilters label:hover {
     background-color: #A2CE2A;
@@ -721,33 +764,4 @@ i {
 #filterFilters input[type="radio"]:checked+label {
     background-color: #A2CE2A;
     color: #ffffff;
-}
-
-#loader {
-    display: none;
-    width: 40px;
-    height: 40px;
-
-    border: 2px solid #f3f3f3;
-    border-top: 3px solid #A2CE2A;
-    border-radius: 100%;
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-
-    animation: spin 1s infinite linear;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
 }

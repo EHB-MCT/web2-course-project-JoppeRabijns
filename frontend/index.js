@@ -5,8 +5,7 @@ document.getElementById("form").addEventListener("submit", (event) => {
   let typeString = "";
   for (let i = 1; i < 9; i++) {
     let type = document.getElementById('checkbox-' + [i]);
-    var isChecked = type.checked;
-    if (isChecked) {
+    if (type.checked) {
       typeString += type.value;
       typeString += ",";
     }
