@@ -580,6 +580,11 @@ i {
     background-color: #A2CE2A;
     width: 60px;
     border-radius: 40px 0px 15px 0px;
+    border: none;
+}
+
+#recipeBack h3 {
+    color: #fff;
 }
 
 

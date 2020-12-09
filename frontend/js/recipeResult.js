@@ -43,6 +43,7 @@ function renderSimilarRecipes(similarData) {
 }
 
 
+
 function renderRecipe(data) {
   let ingredients = ``;
   let instructions = ``;
@@ -59,8 +60,9 @@ function renderRecipe(data) {
     ingredients += `<li>${data.extendedIngredients[key].name}</li>`
   }
   HTML += `
-  <div id="recipeBack">
-  </div>
+  <button id="recipeBack">
+  <h3> < terug </h3>
+  </button>
   <h2>${data.title}</h2>
   <div id="recipeImage">
     <img src="${data.image}" alt="">
@@ -76,4 +78,8 @@ function renderRecipe(data) {
    </ol>
   </div>`
   document.getElementById("recipe").innerHTML = HTML;
+
+  document.getElementById("recipeBack").addEventListener("click", () => {
+    window.history.back();
+  });
 }

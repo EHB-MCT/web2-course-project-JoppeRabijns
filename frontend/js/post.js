@@ -37,14 +37,13 @@ geocoder.on('result', function (e) {
       event.preventDefault();
       postData(restaurantData);
 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'bottom-end',
+      const alert = Swal.mixin({
+        position: 'center',
         showConfirmButton: false,
         timer: 2500,
         timerProgressBar: true
       });
-      Toast.fire({
+      alert.fire({
         icon: 'success',
         title: 'Added restaurant successfully'
       });

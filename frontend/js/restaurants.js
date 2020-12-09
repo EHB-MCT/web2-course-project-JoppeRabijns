@@ -147,6 +147,9 @@ function createMarkers(data) {
           div.style.backgroundColor = "#ffffff";
         }
         document.getElementById(logo.id).style.backgroundColor = "#f2f8e1";
+        document.getElementById(logo.id).scrollIntoView({
+          behavior: "smooth"
+        });
       });
     }
   }
