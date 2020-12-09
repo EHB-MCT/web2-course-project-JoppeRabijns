@@ -121,6 +121,7 @@ function sortOnLocationGeocoder(data) {
 }
 
 function createMarkers(data) {
+  var numberOfRestaurants = Object.keys(data).length;
   for (let key in data) {
     if (data.hasOwnProperty(key)) {
       let logo = document.createElement('div');
@@ -136,12 +137,16 @@ function createMarkers(data) {
         }).setHTML(`<div id="popup"><h4>${data[key].properties.name}<h6>${data[key].properties.address}</h6></div>`)) // add popup
         .addTo(map);
       document.getElementById(logo.id).addEventListener("click", () => {
-        console.log(logo.id);
         map.flyTo({
           center: logo.coordinates,
           essential: true,
           zoom: 16
         });
+        for (let i = 0; i < numberOfRestaurants; i++) {
+          let div = document.getElementById("restaurants").childNodes[i];
+          div.style.backgroundColor = "#ffffff";
+        }
+        document.getElementById(logo.id).style.backgroundColor = "#f2f8e1";
       });
     }
   }
@@ -156,7 +161,7 @@ function createRestaurantList(data) {
     let restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
-    restaurant.id = data[key].geometry.coordinates[1];
+    restaurant.id = data[key]._id;
     let link = restaurant.appendChild(document.createElement('h4'));
     link.className = 'title';
     restaurant.addEventListener("click", () => {
