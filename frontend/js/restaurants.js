@@ -148,6 +148,7 @@ function createMarkers(data) {
 }
 
 function createRestaurantList(data) {
+  var numberOfRestaurants = Object.keys(data).length;
   for (let key in data) {
     let long = data[key].geometry.coordinates[1];
     let lang = data[key].geometry.coordinates[0];
@@ -163,6 +164,11 @@ function createRestaurantList(data) {
         center: [long, lang],
         zoom: 16
       })
+      for (let i = 0; i < numberOfRestaurants; i++) {
+        let div = document.getElementById("restaurants").childNodes[i];
+        div.style.backgroundColor = "#ffffff";
+      }
+      restaurant.style.backgroundColor = "#f2f8e1";
     });
     link.innerHTML = restaurantData.name;
     let details = restaurant.appendChild(document.createElement('h4'));
