@@ -57,7 +57,7 @@ function sortOnLocationGeolocation(data) {
       units: 'kilometers'
     };
     data.forEach(function (restaurantData) {
-      let coordinates = [restaurantData.coordinate1, restaurantData.coordinate2];
+      let coordinates = [restaurantData.coordinate2, restaurantData.coordinate1];
       Object.defineProperty(restaurantData, 'distance', {
         value: turf.distance(coordinates, searchResult, options),
         writable: true,
