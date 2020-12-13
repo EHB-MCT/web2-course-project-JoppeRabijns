@@ -10,7 +10,7 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
 });
 
 async function signin(signinData) {
-  await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/login', {
+  await fetch('http://localhost:3000/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ async function signin(signinData) {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      localStorage.setItem("token", data.token);
       redirect(data);
     });
 }

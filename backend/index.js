@@ -34,8 +34,12 @@ app.listen(port, () => {
   console.log("server is listening");
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+
+
+const authenticate = require('./middleware/authentification');
+
+app.get('/checkLogin', authenticate, (req, res) => {
+  res.send("true");
 });
 
 const AuthRoute = require('./routes/auth');

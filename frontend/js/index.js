@@ -17,7 +17,9 @@ document.getElementById("form").addEventListener("submit", (event) => {
 
 function addToLocalstorage(search, typeString) {
   if (typeof (Storage) !== "undefined") {
-    window.localStorage.clear();
+    localStorage.setItem("search", "");
+    localStorage.setItem("types", "");
+    localStorage.setItem("offset", "");
     localStorage.setItem("search", search);
     localStorage.setItem("types", typeString);
   }

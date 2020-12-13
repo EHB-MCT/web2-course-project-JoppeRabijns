@@ -50,7 +50,7 @@ const login = (req, res, next) => {
         if (result) {
           let token = jwt.sign({
             name: user.name
-          }, 'verySercretValue', {
+          }, '$&dkY6', {
             expiresIn: '1h'
           })
           res.json({
