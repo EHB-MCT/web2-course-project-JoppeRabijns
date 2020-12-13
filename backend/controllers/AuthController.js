@@ -54,6 +54,7 @@ const login = (req, res, next) => {
             expiresIn: '1h'
           })
           res.json({
+            username: user.name,
             message: 'login succesfull',
             token: token
           })
