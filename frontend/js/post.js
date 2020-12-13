@@ -17,18 +17,12 @@ geocoder.on('result', function (e) {
     let name = document.getElementById("formName").value;
     let description = document.getElementById("formDescription").value;
     let restaurantData = {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          e.result.center[1], e.result.center[0]
-        ]
-      },
-      "properties": {
-        "name": `${name}`,
-        "description": `${description}`,
-        "address": `${e.result.place_name}`,
-      }
+      "type": "Feauture",
+      "name": `${name}`,
+      "address": e.result.place_name,
+      "description": `${description}`,
+      "coordinate1": e.result.center[0],
+      "coordinate2": e.result.center[1]
     };
     if (name == "" || description == "") {
       formError.innerHTML = "Please fill in all the fields";

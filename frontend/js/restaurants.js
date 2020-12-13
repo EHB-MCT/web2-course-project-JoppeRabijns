@@ -23,6 +23,7 @@ async function fetchData() {
   await fetch('https://web2-course-project-api-jopper.herokuapp.com/api/restaurants')
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data)
     });
   hideLoader();
@@ -56,8 +57,8 @@ function sortOnLocationGeolocation(data) {
       units: 'kilometers'
     };
     data.forEach(function (restaurantData) {
-      let coordinates = [restaurantData.geometry.coordinates[0], restaurantData.geometry.coordinates[1]];
-      Object.defineProperty(restaurantData.properties, 'distance', {
+      let coordinates = [restaurantData.coordinate1, restaurantData.coordinate2];
+      Object.defineProperty(restaurantData, 'distance', {
         value: turf.distance(coordinates, searchResult, options),
         writable: true,
         enumerable: true,
@@ -66,11 +67,11 @@ function sortOnLocationGeolocation(data) {
     });
 
     data.sort(function (a, b) {
-      if (a.properties.distance > b.properties.distance) {
+      if (a.distance > b.distance) {
         return 1;
 
       }
-      if (a.properties.distance < b.properties.distance) {
+      if (a.distance < b.distance) {
         return -1;
       }
       return 0;
@@ -80,7 +81,6 @@ function sortOnLocationGeolocation(data) {
     while (sortedRestaurants.firstChild) {
       sortedRestaurants.removeChild(sortedRestaurants.firstChild);
     }
-
     createRestaurantList(data);
   });
 }
@@ -92,8 +92,8 @@ function sortOnLocationGeocoder(data) {
       units: 'kilometers'
     };
     data.forEach(function (restaurantData) {
-      let coordinates = [restaurantData.geometry.coordinates[1], restaurantData.geometry.coordinates[0]];
-      Object.defineProperty(restaurantData.properties, 'distance', {
+      let coordinates = [restaurantData.coordinate1, restaurantData.coordinate2];
+      Object.defineProperty(restaurantData, 'distance', {
         value: turf.distance(coordinates, searchResult, options),
         writable: true,
         enumerable: true,
@@ -102,11 +102,11 @@ function sortOnLocationGeocoder(data) {
     });
 
     data.sort(function (a, b) {
-      if (a.properties.distance > b.properties.distance) {
+      if (a.distance > b.distance) {
         return 1;
 
       }
-      if (a.properties.distance < b.properties.distance) {
+      if (a.distance < b.distance) {
         return -1;
       }
       return 0;
@@ -127,14 +127,14 @@ function createMarkers(data) {
       let logo = document.createElement('div');
       logo.className = 'marker';
       logo.id = data[key]._id;
-      logo.coordinates = [data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]];
+      logo.coordinates = [data[key].coordinate1, data[key].coordinate2];
       let marker = new mapboxgl.Marker(logo, {
           anchor: 'bottom'
         })
-        .setLngLat([data[key].geometry.coordinates[1], data[key].geometry.coordinates[0]])
+        .setLngLat([data[key].coordinate1, data[key].coordinate2])
         .setPopup(new mapboxgl.Popup({
           anchor: 'top'
-        }).setHTML(`<div id="popup"><h4>${data[key].properties.name}<h6>${data[key].properties.address}</h6></div>`)) // add popup
+        }).setHTML(`<div id="popup"><h4>${data[key].name}<h6>${data[key].address}</h6></div>`)) // add popup
         .addTo(map);
       document.getElementById(logo.id).addEventListener("click", () => {
         map.flyTo({
@@ -158,9 +158,8 @@ function createMarkers(data) {
 function createRestaurantList(data) {
   var numberOfRestaurants = Object.keys(data).length;
   for (let key in data) {
-    let long = data[key].geometry.coordinates[1];
-    let lang = data[key].geometry.coordinates[0];
-    let restaurantData = data[key].properties;
+    let long = data[key].coordinate1;
+    let lang = data[key].coordinate2;
     let restaurants = document.getElementById('restaurants');
     let restaurant = restaurants.appendChild(document.createElement('div'));
     restaurant.className = 'restaurantStyle';
@@ -178,23 +177,23 @@ function createRestaurantList(data) {
       }
       restaurant.style.backgroundColor = "#f2f8e1";
     });
-    link.innerHTML = restaurantData.name;
+    link.innerHTML = data[key].name;
     let details = restaurant.appendChild(document.createElement('h4'));
     details.className = 'description';
-    details.innerHTML = restaurantData.description;
+    details.innerHTML = data[key].description;
     let address = restaurant.appendChild(document.createElement('h6'));
     address.className = 'address';
-    address.innerHTML = restaurantData.address;
+    address.innerHTML = data[key].address;
 
     //distance
     let distance = restaurant.appendChild(document.createElement('h6'));
-    distance.innerHTML = restaurantData.distance;
+    distance.innerHTML = data[key].distance;
     distance.className = 'distance';
     if (distance.innerHTML == "undefined") {
       distance.removeChild(distance.firstChild);
       distance.style.display = "none";
     } else {
-      distance.innerHTML = parseFloat(restaurantData.distance).toFixed(1) + " km";
+      distance.innerHTML = parseFloat(data[key].distance).toFixed(1) + " km";
     }
   }
 }

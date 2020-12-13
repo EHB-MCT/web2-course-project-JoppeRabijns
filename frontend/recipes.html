@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glutenvrij Dichtbij</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <header>
+        <nav id="menu">
+            <div id="logoBackground">
+                <a href="./recipes.html">
+                    <img src="./images/logo.png" alt="">
+                </a>
+            </div>
+            <ul>
+                <li id="menuItem"><a id="active" href="">Recipes</a></li>
+                <li id="menuItem"><a href="./restaurants.html">Restaurants</a></li>
+                <li id="menuItem"><a href="./addRestaurant.html">Add restaurant</a></li>
+                <li id="menuItem"><a href="">My profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <form autocomplete="off" id="form" action="">
+            <h1 id="formTitle">Are you hungry?</h1>
+            <input id="formSearchbar" type="search" placeholder="Ingredients, recipes, …">
+            <div id="formFilters">
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-1" type="checkbox" value="DESSERT"><span>DESSERT</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-2" type="checkbox" value="BREAKFAST"><span>BREAKFAST</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-3" type="checkbox" value="BEVERAGE"><span>BEVERAGE</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-4" type="checkbox" value="SNACK"><span>SNACK</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-5" type="checkbox" value="SALAD"><span>SALAD</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-6" type="checkbox" value="SOUP"><span>SOUP</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-7" type="checkbox" value="SIDE DISH"><span>SIDE DISH</span>
+                    </label>
+                </div>
+                <div id="formFilter">
+                    <label>
+                        <input id="checkbox-8" type="checkbox" value="DRINK"><span>DRINK</span>
+                    </label>
+                </div>
+            </div>
+            <input id="formSubmit" type="submit" value="SEARCH">
+        </form>
+
+        <div id="favorites">
+            <h2 id="favoritesTitle">Your favorites</h2>
+            <div id="cards">
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+
+    </footer>
+
+    <script src="./js/index.js"></script>
+</body>
+
+</html>
