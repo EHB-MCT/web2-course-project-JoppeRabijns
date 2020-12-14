@@ -28,17 +28,6 @@ async function signin(signinData) {
 
 function redirect(data) {
   if (data.token) {
-    const alert = Swal.mixin({
-      position: 'center',
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true
-    });
-    alert.fire({
-      icon: 'success',
-      title: `${data.message}`
-    });
-
     setTimeout(function () {
       window.location = "./recipes.html";
     }, 1500);
