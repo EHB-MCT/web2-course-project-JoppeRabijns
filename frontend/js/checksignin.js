@@ -1,4 +1,4 @@
-token = localStorage.getItem("token");
+token = sessionStorage.getItem("token");
 
 fetch('https://web2-course-project-api-jopper.herokuapp.com/checkLogin', {
   method: 'GET',
@@ -18,5 +18,5 @@ function checkIfLogin(data) {
 }
 
 document.getElementById("signOut").addEventListener("click", () => {
-  localStorage.clear();
+  sessionStorage.clear();
 })
