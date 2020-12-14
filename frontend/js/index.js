@@ -33,8 +33,35 @@ fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/userData/${userI
     'Authorization': `Bearer ${token}`,
   }
 }).then(response => response.json()
-  .then(userData => getFavorites(userData))
+  .then(userData => userDataFunctions(userData))
 );
+
+function userDataFunctions(userData) {
+  getFavorites(userData);
+  firstLoginNotification(userData);
+}
+
+function firstLoginNotification(userData) {
+  var visited = localStorage.getItem("visited")
+  if (!visited) {
+    setTimeout(function () {
+      Swal.fire({
+        toast: true,
+        showConfirmButton: false,
+        position: "top-right",
+        timer: 4500,
+        allowOutsideClick: true,
+        imageUrl: './images/logoIcon.png',
+        imageWidth: 50,
+        imageHeight: 50,
+        padding: "0px",
+        width: "300px",
+        title: `Welcome ${userData.name}!`
+      });
+    }, 1000);
+    localStorage.setItem("visited", true);
+  }
+}
 
 
 async function getFavorites(userData) {
