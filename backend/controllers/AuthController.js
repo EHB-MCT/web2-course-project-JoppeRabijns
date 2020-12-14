@@ -14,7 +14,8 @@ const register = (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
-      password: hashedPass
+      password: hashedPass,
+      favorites: []
     })
     user.save()
       .then(user => {
