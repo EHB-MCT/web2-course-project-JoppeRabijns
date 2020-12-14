@@ -24,15 +24,80 @@ function addToLocalstorage(search, typeString) {
   }
 }
 
-async function getFavorites() {
-  let userId = localStorage.getItem("userId");
-  await fetch('http://localhost:3000/api/favourites', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userId)
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
+let token = localStorage.getItem("token");
+let userId = localStorage.getItem("userId");
+
+fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/userData/${userId}`, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+  }
+}).then(response => response.json()
+  .then(userData => getFavorites(userData))
+);
+
+
+async function getFavorites(userData) {
+  let favoriteData = [];
+  favoriteData.push(userData.favorites);
+  let HTML = "";
+  if (favoriteData[0].length === 0) {
+    HTML += `<h1>You have no favorites</h1>`;
+    document.getElementById("favorites").innerHTML = HTML;
+  } else {
+    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=5ffc209e9a3f4fb1bc06792568f37534&ids=${userData.favorites}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data),
+          addRecipe(data, userData)
+      })
+  }
+}
+
+
+function addRecipe(data, userData) {
+  let favoriteData = [];
+  favoriteData.push(userData.favorites);
+  let HTML = "";
+  if (favoriteData[0].length === 0) {
+    HTML += `<h1>You have no favorites</h1>`;
+    document.getElementById("favorites").innerHTML = HTML;
+  } else {
+    for (let key in userData.favorites) {
+      HTML += `<div id="card">
+    <div id="cardImageDiv">
+    <input class="checkbox"id='${data[key].id}' checked type="checkbox"></i>
+        <div id="cardInfoTime">
+            <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
+        </div>
+        <img id="cardImage" src="${data[key].image}" alt="">
+    </div>
+    <h2 id="cardTitle">${data[key].title}</h2>
+    <button class="cardButton" id="button-${data[key].id}">Bekijk</button>
+  </div>`;
+    }
+    document.getElementById("cards").innerHTML = HTML;
+    for (let key in data) {
+      document.getElementById(`button-${data[key].id}`).addEventListener("click", () => {
+        localStorage.setItem("idRecipe", data[key].id);
+        window.location = "./recipeResult.html";
+      });
+      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+        remove(userData.favorites, data[key].id);
+        remove(data, data[key].id);
+        console.log(userData.favorites);
+        addRecipe(data, userData);
+      });
+    }
+  }
+}
+
+
+function remove(array, element) {
+  let id = JSON.stringify(element);
+  const index = array.indexOf(id);
+
+  if (index !== -1) {
+    array.splice(index, 1);
+  }
 }

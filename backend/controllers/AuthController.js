@@ -73,6 +73,7 @@ const login = (req, res, next) => {
   })
 }
 
+
 const userData = (req, res, next) => {
   let id = req.params.id
   User.findById(id,
@@ -85,8 +86,20 @@ const userData = (req, res, next) => {
     }
   )
 };
+
+
+const userList = (req, res, next) => {
+  User.find({}, function (err, users) {
+    res.send(users);
+  });
+};
+
+
+
+
 module.exports = {
   register,
   login,
-  userData
+  userData,
+  userList
 };

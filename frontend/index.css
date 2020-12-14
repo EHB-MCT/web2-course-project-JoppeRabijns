@@ -117,9 +117,7 @@ i {
     float: left;
 }
 
-.icon-heart:before {
-    content: "\e901";
-    color: #fff;
+.checkbox {
     position: absolute;
     z-index: 999;
     right: 19px;
@@ -805,4 +803,8 @@ i {
 #filterFilters input[type="radio"]:checked+label {
     background-color: #A2CE2A;
     color: #ffffff;
+}
+
+#cards {
+    width: 80vw;
 }
