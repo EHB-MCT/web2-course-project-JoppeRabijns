@@ -17,15 +17,15 @@ document.getElementById("form").addEventListener("submit", (event) => {
 
 function addToLocalstorage(search, typeString) {
   if (typeof (Storage) !== "undefined") {
-    localStorage.setItem("search", "");
-    localStorage.setItem("types", "");
-    localStorage.setItem("search", search);
-    localStorage.setItem("types", typeString);
+    sessionStorage.setItem("search", "");
+    sessionStorage.setItem("types", "");
+    sessionStorage.setItem("search", search);
+    sessionStorage.setItem("types", typeString);
   }
 }
 
-let token = localStorage.getItem("token");
-let userId = localStorage.getItem("userId");
+let token = sessionStorage.getItem("token");
+let userId = sessionStorage.getItem("userId");
 
 fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/userData/${userId}`, {
   method: 'GET',
@@ -42,7 +42,7 @@ function userDataFunctions(userData) {
 }
 
 function firstLoginNotification(userData) {
-  var visited = localStorage.getItem("visited")
+  var visited = sessionStorage.getItem("visited")
   if (!visited) {
     setTimeout(function () {
       Swal.fire({
@@ -59,7 +59,7 @@ function firstLoginNotification(userData) {
         title: `Welcome ${userData.name}!`
       });
     }, 1000);
-    localStorage.setItem("visited", true);
+    sessionStorage.setItem("visited", true);
   }
 }
 
@@ -106,7 +106,7 @@ function addRecipe(data, userData) {
     document.getElementById("cards").innerHTML = HTML;
     for (let key in data) {
       document.getElementById(`button-${data[key].id}`).addEventListener("click", () => {
-        localStorage.setItem("idRecipe", data[key].id);
+        sessionStorage.setItem("idRecipe", data[key].id);
         window.location = "./recipeResult.html";
       });
       document.getElementById(`${data[key].id}`).addEventListener("change", () => {

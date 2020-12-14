@@ -19,8 +19,8 @@ async function signin(signinData) {
     })
     .then(response => response.json())
     .then(data => {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.userId);
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("userId", data.userId);
       console.log(data);
       redirect(data);
     });
@@ -30,7 +30,7 @@ function redirect(data) {
   if (data.token) {
     setTimeout(function () {
       window.location = "./recipes.html";
-    }, 1500);
+    }, 1000);
   } else {
     const alert = Swal.mixin({
       position: 'center',

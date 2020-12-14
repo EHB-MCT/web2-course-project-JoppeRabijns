@@ -2,7 +2,7 @@ fetchData();
 fetchSimilarData();
 
 async function fetchData() {
-  let idRecipe = localStorage.getItem("idRecipe");
+  let idRecipe = sessionStorage.getItem("idRecipe");
   let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=cee7a81c28e441efa3b14a67c611c790`);
   let data = await response.json();
   console.log(data);
@@ -11,7 +11,7 @@ async function fetchData() {
 }
 
 async function fetchSimilarData() {
-  let idRecipe = localStorage.getItem("idRecipe");
+  let idRecipe = sessionStorage.getItem("idRecipe");
   let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=cee7a81c28e441efa3b14a67c611c790&number=4`);
   let similarData = await similarResponse.json();
   renderSimilarRecipes(similarData);
@@ -36,7 +36,7 @@ function renderSimilarRecipes(similarData) {
   document.getElementById("similar").innerHTML = HTML;
   for (let key in similarData) {
     document.getElementById(`${similarData[key].id}`).addEventListener("click", () => {
-      localStorage.setItem("idRecipe", similarData[key].id);
+      sessionStorage.setItem("idRecipe", similarData[key].id);
       location.reload();
     });
   }
