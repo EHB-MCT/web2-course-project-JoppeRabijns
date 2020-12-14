@@ -10,7 +10,6 @@ fetch('https://web2-course-project-api-jopper.herokuapp.com/checkLogin', {
 );
 
 function checkIfLogin(data) {
-  console.log(data);
   if (data == true) {
     console.log("signedIn");
   } else {

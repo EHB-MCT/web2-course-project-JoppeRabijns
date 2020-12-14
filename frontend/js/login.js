@@ -20,6 +20,8 @@ async function signin(signinData) {
     .then(response => response.json())
     .then(data => {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId);
+      console.log(data);
       redirect(data);
     });
 }

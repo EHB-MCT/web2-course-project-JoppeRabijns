@@ -72,7 +72,20 @@ const login = (req, res, next) => {
   })
 }
 
+const userData = (req, res, next) => {
+  let id = req.params.id
+  User.findById(id,
+    function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      };
+    }
+  )
+};
 module.exports = {
   register,
-  login
+  login,
+  userData
 };

@@ -158,7 +158,6 @@ function addToLocalstorage(search, typeString) {
   if (typeof (Storage) !== "undefined") {
     localStorage.setItem("search", "");
     localStorage.setItem("types", "");
-    localStorage.setItem("offset", "");
     localStorage.setItem("search", search);
     localStorage.setItem("types", typeString);
   }

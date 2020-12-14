@@ -42,6 +42,8 @@ app.get('/checkLogin', authenticate, (req, res) => {
   res.send("true");
 });
 
+
+
 const AuthRoute = require('./routes/auth');
 const RestaurantRoute = require('./routes/restaurant');
 

@@ -19,8 +19,20 @@ function addToLocalstorage(search, typeString) {
   if (typeof (Storage) !== "undefined") {
     localStorage.setItem("search", "");
     localStorage.setItem("types", "");
-    localStorage.setItem("offset", "");
     localStorage.setItem("search", search);
     localStorage.setItem("types", typeString);
   }
+}
+
+async function getFavorites() {
+  let userId = localStorage.getItem("userId");
+  await fetch('http://localhost:3000/api/favourites', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userId)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
 }
