@@ -20,4 +20,5 @@ function checkIfLogin(data) {
 
 document.getElementById("signOut").addEventListener("click", () => {
   localStorage.clear();
+  sessionStorage.clear();
 })

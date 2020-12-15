@@ -42,7 +42,7 @@ function userDataFunctions(userData) {
 }
 
 function firstLoginNotification(userData) {
-  var visited = localStorage.getItem("visited")
+  var visited = sessionStorage.getItem("visited");
   if (!visited) {
     setTimeout(function () {
       Swal.fire({
@@ -59,7 +59,7 @@ function firstLoginNotification(userData) {
         title: `Welcome ${userData.name}!`
       });
     }, 1000);
-    localStorage.setItem("visited", true);
+    sessionStorage.setItem("visited", true);
   }
 }
 

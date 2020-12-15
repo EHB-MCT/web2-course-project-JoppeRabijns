@@ -5,8 +5,8 @@ fetchData();
 async function fetchData() {
   showLoader();
   try {
-    let search = sessionStorage.getItem("search");
-    let types = sessionStorage.getItem("types");
+    let search = localStorage.getItem("search");
+    let types = localStorage.getItem("types");
     await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
       .then(response => response.json())
       .then(data => {
@@ -44,21 +44,21 @@ function addRecipe(data) {
     for (let key in data) {
       HTML += `<div id="card">
     <div id="cardImageDiv">
-    <i class="icon-heart"></i>
+    <input class="checkbox"id='${data[key].id}' checked type="checkbox"></i>
         <div id="cardInfoTime">
             <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
         </div>
         <img id="cardImage" src="${data[key].image}" alt="">
     </div>
     <h2 id="cardTitle">${data[key].title}</h2>
-    <button class="cardButton" id="${data[key].id}">Bekijk</button>
+    <button class="cardButton" id="button-${data[key].id}">Bekijk</button>
   </div>`;
     }
   }
   document.getElementById("searchResults").innerHTML = HTML;
   for (let key in data) {
-    document.getElementById(`${data[key].id}`).addEventListener("click", () => {
-      sessionStorage.setItem("idRecipe", data[key].id);
+    document.getElementById(`button-${data[key].id}`).addEventListener("click", () => {
+      localStorage.setItem("idRecipe", data[key].id);
       window.location = "./recipeResult.html";
     });
   }
@@ -156,9 +156,9 @@ document.getElementById("formResultPage").addEventListener("submit", (event) => 
 
 function addToLocalstorage(search, typeString) {
   if (typeof (Storage) !== "undefined") {
-    sessionStorage.setItem("search", "");
-    sessionStorage.setItem("types", "");
-    sessionStorage.setItem("search", search);
-    sessionStorage.setItem("types", typeString);
+    localStorage.setItem("search", "");
+    localStorage.setItem("types", "");
+    localStorage.setItem("search", search);
+    localStorage.setItem("types", typeString);
   }
 }
