@@ -75,7 +75,7 @@ const login = (req, res, next) => {
 
 
 const userData = (req, res, next) => {
-  let id = req.params.id
+  let id = req.params.id;
   User.findById(id,
     function (err, result) {
       if (err) {
@@ -85,6 +85,20 @@ const userData = (req, res, next) => {
       };
     }
   )
+};
+
+const updateFavorites = (req, res, next) => {
+  let id = req.params.id;
+  let favorites = req.body.favorites;
+  User.findByIdAndUpdate(id, {
+    "favorites": [favorites]
+  }, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("updated");
+    }
+  });
 };
 
 
@@ -101,5 +115,6 @@ module.exports = {
   register,
   login,
   userData,
-  userList
+  userList,
+  updateFavorites
 };
