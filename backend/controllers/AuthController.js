@@ -91,7 +91,7 @@ const updateFavorites = (req, res, next) => {
   let id = req.params.id;
   let favorites = req.body.favorites;
   User.findByIdAndUpdate(id, {
-    "favorites": [favorites]
+    "favorites": favorites
   }, function (err, result) {
     if (err) {
       res.send(err);
