@@ -64,16 +64,17 @@ body {
 #loginFormDiv img {
     height: 300px;
     width: auto;
-    margin-top: 10%;
-    margin-bottom: 2%;
+    margin-top: 11%;
+    margin-bottom: 9%;
 }
 
 #loginForm input {
     display: block;
+    margin-bottom: 25px;
     width: 300px;
-    height: 50px;
-    border: #A2CE2A 1px solid;
-    border-radius: 10px;
+    height: 20px;
+    border: none;
+    border-bottom: #A2CE2A 1.5px solid;
 }
 
 #loginFormPassword {
@@ -83,18 +84,22 @@ body {
 
 #loginForm input[type=submit] {
     display: block;
+    margin-top: 25px;
     margin-bottom: 15px;
     width: 300px;
     height: 50px;
     background-color: #A2CE2A;
     color: #ffffff;
-    border-radius: 10px;
-    font: 14px Poppins;
+    border-radius: 44px;
+    font: 14px 'Poppins';
+    font-weight: 600;
 }
 
 #loginForm label {
     margin: 0;
-    font: 13px Poppins;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #A2CE2A;
     padding: 0;
 }
 
@@ -102,15 +107,18 @@ body {
     margin: 0;
     margin-bottom: 35px;
     font-size: 14px;
-    color: #A2CE2A;
     font-weight: 200;
     text-align: center;
 }
 
 #signupLink a {
     font-size: 14px;
-    color: #A2CE2A;
+    color: #313131;
     text-decoration: none;
+}
+
+#signupLink span {
+    color: #A2CE2A;
     font-weight: 700;
 }
 
@@ -212,6 +220,7 @@ i {
 #active {
     border-bottom: 2px solid #A2CE2A;
 }
+
 
 /* NAV END */
 

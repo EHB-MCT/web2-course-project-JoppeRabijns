@@ -49,7 +49,7 @@ function firstLoginNotification(userData) {
         toast: true,
         showConfirmButton: false,
         position: "top-right",
-        timer: 4500,
+        timer: 5000,
         allowOutsideClick: true,
         imageUrl: './images/logoIcon.png',
         imageWidth: 50,
