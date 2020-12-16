@@ -13,33 +13,69 @@ async function fetchData() {
 async function fetchSimilarData() {
   let idRecipe = localStorage.getItem("idRecipe");
   let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=cee7a81c28e441efa3b14a67c611c790&number=4`);
-  let similarData = await similarResponse.json();
-  renderSimilarRecipes(similarData);
+  let data = await similarResponse.json();
+  userDataFunctions(data);
 }
 
-function renderSimilarRecipes(similarData) {
-  console.log(similarData);
-  let HTML = ``;
-  for (let key in similarData) {
+function userDataFunctions(data) {
+  let token = localStorage.getItem("token");
+  let userId = localStorage.getItem("userId");
+  fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/userData/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  }).then(response => response.json()
+    .then(userData => addRecipe(data, userData))
+  );
+}
+
+function addRecipe(data, userData) {
+  let HTML = "";
+  console.log(data);
+  for (let key in data) {
     HTML += `<div id="card">
-  <div id="cardImageDiv">
-  <i class="icon-heart"></i>
-      <div id="cardInfoTime">
-          <h6 id="cardInfoText"><i class="icon-clock"></i>${similarData[key].readyInMinutes}</h6>
+    <div id="cardImageDiv">
+    <div id="checkbox">
+           <input class="checkbox"id='${data[key].id}' type="checkbox">
       </div>
-      <img id="cardImage" src='https://spoonacular.com/recipeImages/${similarData[key].id}-556x370.jpg' alt="">
-  </div>
-  <h2 id="cardTitle">${similarData[key].title}</h2>
-  <button class="cardButton" id="${similarData[key].id}">Bekijk</button>
-</div>`;
+        <div id="cardInfoTime">
+            <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
+        </div>
+        <img id="cardImage" src='https://spoonacular.com/recipeImages/${data[key].id}-556x370.jpg' alt="">
+    </div>
+    <h2 id="cardTitle">${data[key].title}</h2>
+    <button class="cardButton" id="button-${data[key].id}">Bekijk</button>
+  </div>`;
   }
   document.getElementById("similar").innerHTML = HTML;
-  for (let key in similarData) {
-    document.getElementById(`${similarData[key].id}`).addEventListener("click", () => {
-      localStorage.setItem("idRecipe", similarData[key].id);
+  for (let key in data) {
+    document.getElementById(`button-${data[key].id}`).addEventListener("click", () => {
+      localStorage.setItem("idRecipe", data[key].id);
       location.reload();
     });
+    document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+      console.log(data[key].id);
+      JSON.stringify(data[key].id);
+      userData.favorites.push(JSON.stringify(data[key].id));
+      console.log(userData.favorites);
+      sendToDatabase(userData.favorites);
+    });
   }
+}
+
+async function sendToDatabase(favoritesArray) {
+  let id = localStorage.getItem("userId");
+  await fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/updateFavorites/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      favorites: favoritesArray
+    })
+  });
+  console.log("succes");
 }
 
 
