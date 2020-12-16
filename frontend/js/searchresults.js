@@ -59,7 +59,9 @@ function addRecipe(data, userData) {
     for (let key in data) {
       HTML += `<div id="card">
     <div id="cardImageDiv">
-    <input class="checkbox"id='${data[key].id}' type="checkbox"></i>
+    <div id="checkbox">
+           <input class="checkbox"id='${data[key].id}' type="checkbox">
+      </div>
         <div id="cardInfoTime">
             <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
         </div>
