@@ -158,13 +158,6 @@ i {
     float: left;
 }
 
-.checkbox {
-    position: absolute;
-    z-index: 999;
-    right: 19px;
-    top: 15px;
-    font-size: 35px;
-}
 
 
 
@@ -335,8 +328,10 @@ i {
 /* FORM END */
 
 #favorites {
-    position: fixed;
-    bottom: 5vh;
+    width: 97%;
+    position: absolute;
+    z-index: -99;
+    top: 55vh;
 }
 
 
@@ -417,6 +412,15 @@ i {
     background: #A2CE2A;
     color: #fff;
 }
+
+.checkbox {
+    position: absolute;
+    z-index: 999;
+    right: 19px;
+    top: 15px;
+}
+
+
 
 /* CARD END */
 
@@ -845,8 +849,4 @@ i {
 #filterFilters input[type="radio"]:checked+label {
     background-color: #A2CE2A;
     color: #ffffff;
-}
-
-#cards {
-    width: 80vw;
 }

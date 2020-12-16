@@ -7,10 +7,10 @@ async function fetchData() {
   try {
     let search = localStorage.getItem("search");
     let types = localStorage.getItem("types");
-    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
+    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e24201e68c7a4406a41930950e2aeef2&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
       .then(response => response.json())
       .then(data => {
-        addRecipe(data.results), sort(data), filter(data)
+        userDataFunctions(data), sort(data), filter(data)
       })
     hideLoader();
   } catch (err) {
@@ -35,7 +35,22 @@ function hideLoader() {
 }
 
 
-function addRecipe(data) {
+
+function userDataFunctions(data) {
+  let token = localStorage.getItem("token");
+  let userId = localStorage.getItem("userId");
+  fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/userData/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  }).then(response => response.json()
+    .then(userData => addRecipe(data.results, userData))
+  );
+}
+
+
+function addRecipe(data, userData) {
   let HTML = "";
   if (data.length === 0) {
     HTML += `<h1>No recipes were found...</h1>`;
@@ -44,7 +59,7 @@ function addRecipe(data) {
     for (let key in data) {
       HTML += `<div id="card">
     <div id="cardImageDiv">
-    <input class="checkbox"id='${data[key].id}' checked type="checkbox"></i>
+    <input class="checkbox"id='${data[key].id}' type="checkbox"></i>
         <div id="cardInfoTime">
             <h6 id="cardInfoText"><i class="icon-clock"></i>${data[key].readyInMinutes}</h6>
         </div>
@@ -61,7 +76,28 @@ function addRecipe(data) {
       localStorage.setItem("idRecipe", data[key].id);
       window.location = "./recipeResult.html";
     });
+    document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+      console.log(data[key].id);
+      JSON.stringify(data[key].id);
+      userData.favorites.push(JSON.stringify(data[key].id));
+      console.log(userData.favorites);
+      sendToDatabase(userData.favorites);
+    });
   }
+}
+
+async function sendToDatabase(favoritesArray) {
+  let id = localStorage.getItem("userId");
+  await fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/updateFavorites/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      favorites: favoritesArray
+    })
+  });
+  console.log("succes");
 }
 
 

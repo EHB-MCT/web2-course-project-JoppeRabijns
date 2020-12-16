@@ -72,12 +72,13 @@ async function getFavorites(userData) {
     HTML += `<h1>You have no favorites</h1>`;
     document.getElementById("favorites").innerHTML = HTML;
   } else {
-    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=5ffc209e9a3f4fb1bc06792568f37534&ids=${userData.favorites}`)
+    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=e24201e68c7a4406a41930950e2aeef2&ids=${userData.favorites}`)
       .then(response => response.json())
       .then(data => {
         console.log(data),
-          addRecipe(data, userData)
+          addRecipe(data, userData);
       })
+
   }
 }
 
@@ -110,21 +111,26 @@ function addRecipe(data, userData) {
         window.location = "./recipeResult.html";
       });
       document.getElementById(`${data[key].id}`).addEventListener("change", () => {
-        remove(userData.favorites, data[key].id);
-        remove(data, data[key].id);
-        console.log(userData.favorites);
+        let index = userData.favorites.indexOf(`${data[key].id}`)
+        data.splice(index, 1);
+        userData.favorites.splice(index, 1);
         addRecipe(data, userData);
+        sendToDatabase(userData.favorites);
       });
     }
   }
 }
 
-
-function remove(array, element) {
-  let id = JSON.stringify(element);
-  const index = array.indexOf(id);
-
-  if (index !== -1) {
-    array.splice(index, 1);
-  }
+async function sendToDatabase(favoritesArray) {
+  let id = localStorage.getItem("userId");
+  await fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/updateFavorites/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      favorites: favoritesArray
+    })
+  });
+  console.log('recipe removed!');
 }

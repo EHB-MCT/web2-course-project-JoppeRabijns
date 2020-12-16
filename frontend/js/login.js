@@ -30,7 +30,7 @@ function redirect(data) {
   if (data.token) {
     setTimeout(function () {
       window.location = "./recipes.html";
-    }, 1000);
+    }, 100);
   } else {
     const alert = Swal.mixin({
       position: 'center',

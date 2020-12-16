@@ -9,6 +9,7 @@ var geocoder = new MapboxGeocoder({
 
 geocoder.addTo('#geocoder');
 
+
 geocoder.on('result', function (e) {
   let form = document.getElementById("form");
   let formTitle = document.getElementById("formTitle");
