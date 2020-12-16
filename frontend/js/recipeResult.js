@@ -103,6 +103,7 @@ function renderRecipe(data) {
   <div id="recipeImage">
     <img src="${data.image}" alt="">
   </div>
+  
   <div id="recipeIngredients">
     <h3>Ingredients</h3>
     <ul> ${ingredients}</ul>

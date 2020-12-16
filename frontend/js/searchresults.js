@@ -7,7 +7,7 @@ async function fetchData() {
   try {
     let search = localStorage.getItem("search");
     let types = localStorage.getItem("types");
-    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e24201e68c7a4406a41930950e2aeef2&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
+    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
       .then(response => response.json())
       .then(data => {
         userDataFunctions(data), sort(data), filter(data)
@@ -84,6 +84,17 @@ function addRecipe(data, userData) {
       userData.favorites.push(JSON.stringify(data[key].id));
       console.log(userData.favorites);
       sendToDatabase(userData.favorites);
+      Swal.fire({
+        toast: true,
+        showConfirmButton: false,
+        position: "center",
+        imageUrl: './images/logoIcon.png',
+        imageWidth: 50,
+        imageHeight: 50,
+        timer: 3000,
+        width: "300px",
+        title: `Added to favourites!`
+      });
     });
   }
 }
