@@ -3,7 +3,7 @@ fetchSimilarData();
 
 async function fetchData() {
   let idRecipe = localStorage.getItem("idRecipe");
-  let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=cee7a81c28e441efa3b14a67c611c790`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=b19c72e55d624db89ca25f0b25b9e63b`);
   let data = await response.json();
   console.log(data);
   renderRecipe(data);
@@ -12,7 +12,7 @@ async function fetchData() {
 
 async function fetchSimilarData() {
   let idRecipe = localStorage.getItem("idRecipe");
-  let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=cee7a81c28e441efa3b14a67c611c790&number=4`);
+  let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=b19c72e55d624db89ca25f0b25b9e63b&number=4`);
   let data = await similarResponse.json();
   userDataFunctions(data);
 }
@@ -54,13 +54,22 @@ function addRecipe(data, userData) {
       localStorage.setItem("idRecipe", data[key].id);
       location.reload();
     });
-    document.getElementById(`${data[key].id}`).addEventListener("change", () => {
-      console.log(data[key].id);
-      JSON.stringify(data[key].id);
-      userData.favorites.push(JSON.stringify(data[key].id));
-      console.log(userData.favorites);
-      sendToDatabase(userData.favorites);
-    });
+    if (userData.favorites.indexOf(`${data[key].id}`) != -1) {
+      document.getElementById(data[key].id).checked = true;
+      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+        let index = userData.favorites.indexOf(`${data[key].id}`);
+        data.splice(index, 1);
+        userData.favorites.splice(index, 1);
+        sendToDatabase(userData.favorites);
+      });
+    } else {
+      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+        JSON.stringify(data[key].id);
+        userData.favorites.push(JSON.stringify(data[key].id));
+        console.log(userData.favorites);
+        sendToDatabase(userData.favorites);
+      });
+    }
   }
 }
 

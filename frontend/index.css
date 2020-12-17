@@ -738,6 +738,7 @@ i {
 }
 
 #similarRecipes {
+    margin-left: 25px;
     margin-top: 20px;
     display: inline-block;
     width: 30%;
@@ -745,7 +746,6 @@ i {
 }
 
 #similar {
-    margin-left: 25px;
     width: 100%;
     display: grid;
     grid-template-columns: 50% 50%;
