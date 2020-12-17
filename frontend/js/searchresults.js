@@ -7,10 +7,10 @@ async function fetchData() {
   try {
     let search = localStorage.getItem("search");
     let types = localStorage.getItem("types");
-    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
+    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=cee7a81c28e441efa3b14a67c611c790&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
       .then(response => response.json())
       .then(data => {
-        userDataFunctions(data), sort(data), filter(data)
+        userDataFunctions(data)
       })
     hideLoader();
   } catch (err) {
@@ -45,8 +45,12 @@ function userDataFunctions(data) {
       'Authorization': `Bearer ${token}`,
     }
   }).then(response => response.json()
-    .then(userData => addRecipe(data.results, userData))
+    .then(userData => recipeFunctions(data, userData))
   );
+}
+
+function recipeFunctions(data, userData) {
+  addRecipe(data.results, userData), sort(data, userData), filter(data, userData)
 }
 
 
@@ -123,7 +127,7 @@ async function sendToDatabase(favoritesArray) {
 }
 
 
-function sort(data) {
+function sort(data, userData) {
   document.getElementById("time").addEventListener("change", () => {
     data.results.sort(function (a, b) {
       if (a.readyInMinutes < b.readyInMinutes) {
@@ -134,7 +138,7 @@ function sort(data) {
       }
       return 0;
     });
-    addRecipe(data.results);
+    addRecipe(data.results, userData);
   });
   document.getElementById("healthScore").addEventListener("change", () => {
     data.results.sort(function (a, b) {
@@ -146,11 +150,11 @@ function sort(data) {
       }
       return 0;
     });
-    addRecipe(data.results);
+    addRecipe(data.results, userData);
   });
 }
 
-function filter(data) {
+function filter(data, userData) {
   document.getElementById("vegetarian").addEventListener("change", () => {
     let testData = [];
     testData.push(data.results);
@@ -159,7 +163,7 @@ function filter(data) {
         return a;
       }
     });
-    addRecipe(filterData);
+    addRecipe(filterData, userData);
   });
 
   document.getElementById("vegan").addEventListener("change", () => {
@@ -170,7 +174,7 @@ function filter(data) {
         return a;
       }
     });
-    addRecipe(filterData);
+    addRecipe(filterData, userData);
   });
 
   document.getElementById("fodmap").addEventListener("change", () => {
@@ -181,7 +185,7 @@ function filter(data) {
         return a;
       }
     });
-    addRecipe(filterData);
+    addRecipe(filterData, userData);
   });
 
   document.getElementById("all").addEventListener("change", () => {
@@ -192,7 +196,7 @@ function filter(data) {
         return a;
       }
     });
-    addRecipe(filterData);
+    addRecipe(filterData, userData);
   });
 }
 
