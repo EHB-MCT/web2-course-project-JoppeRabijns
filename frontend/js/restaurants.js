@@ -134,7 +134,7 @@ function createMarkers(data) {
         .setLngLat([data[key].coordinate1, data[key].coordinate2])
         .setPopup(new mapboxgl.Popup({
           anchor: 'top'
-        }).setHTML(`<div id="popup"><h4>${data[key].name}<h6>${data[key].address}</h6></div>`)) // add popup
+        }).setHTML(`<div id="popup"><h4>${data[key].name}<h6>${data[key].address}</h6></div>`))
         .addTo(map);
       document.getElementById(logo.id).addEventListener("click", () => {
         map.flyTo({

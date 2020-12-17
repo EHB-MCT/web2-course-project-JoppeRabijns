@@ -154,7 +154,7 @@ i {
 .icon-clock:before {
     content: "\e900";
     margin-top: 3px;
-    margin-left: 3px;
+    margin-left: 2px;
     float: left;
 }
 
@@ -428,7 +428,7 @@ i {
 #checkbox input[type="checkbox"] {
     height: 20px;
     width: 20px;
-    background-color: rgb(213, 255, 159);
+    background-color: rgb(239, 253, 220);
     position: relative;
     outline: none;
     transform: rotate(45deg);
@@ -438,7 +438,7 @@ i {
 #checkbox input[type="checkbox"]::before {
     position: absolute;
     content: "";
-    background-color: rgb(213, 255, 159);
+    background-color: rgb(239, 253, 220);
     height: 60%;
     width: 100%;
     top: -59%;
@@ -448,7 +448,7 @@ i {
 #checkbox input[type="checkbox"]::after {
     position: absolute;
     content: "";
-    background-color: rgb(213, 255, 159);
+    background-color: rgb(239, 253, 220);
     height: 60%;
     width: 100%;
     transform: rotate(-90deg);
@@ -644,7 +644,7 @@ i {
 /* MAP END*/
 
 #recipe {
-    width: 55%;
+    width: 65%;
     overflow: hidden;
     height: 80vh;
     margin-top: 20px;
@@ -713,7 +713,7 @@ i {
 #similarRecipes {
     margin-top: 20px;
     display: inline-block;
-    width: 40%;
+    width: 30%;
     vertical-align: top;
 }
 
@@ -721,7 +721,7 @@ i {
     margin-left: 25px;
     width: 100%;
     display: grid;
-    grid-template-columns: 40% 40%;
+    grid-template-columns: 50% 50%;
 }
 
 #similar #card {

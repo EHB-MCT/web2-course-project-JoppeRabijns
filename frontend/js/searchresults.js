@@ -78,24 +78,34 @@ function addRecipe(data, userData) {
       localStorage.setItem("idRecipe", data[key].id);
       window.location = "./recipeResult.html";
     });
-    document.getElementById(`${data[key].id}`).addEventListener("change", () => {
-      console.log(data[key].id);
-      JSON.stringify(data[key].id);
-      userData.favorites.push(JSON.stringify(data[key].id));
-      console.log(userData.favorites);
-      sendToDatabase(userData.favorites);
-      Swal.fire({
-        toast: true,
-        showConfirmButton: false,
-        position: "center",
-        imageUrl: './images/logoIcon.png',
-        imageWidth: 50,
-        imageHeight: 50,
-        timer: 3000,
-        width: "300px",
-        title: `Added to favourites!`
+    if (userData.favorites.indexOf(`${data[key].id}`) != -1) {
+      document.getElementById(data[key].id).checked = true;
+      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+        let index = userData.favorites.indexOf(`${data[key].id}`)
+        data.splice(index, 1);
+        userData.favorites.splice(index, 1);
+        sendToDatabase(userData.favorites);
       });
-    });
+    } else {
+      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+        console.log(data[key].id);
+        JSON.stringify(data[key].id);
+        userData.favorites.push(JSON.stringify(data[key].id));
+        console.log(userData.favorites);
+        sendToDatabase(userData.favorites);
+        Swal.fire({
+          toast: true,
+          showConfirmButton: false,
+          position: "center",
+          imageUrl: './images/logoIcon.png',
+          imageWidth: 50,
+          imageHeight: 50,
+          timer: 3000,
+          width: "300px",
+          title: `Added to favourites!`
+        });
+      });
+    }
   }
 }
 
