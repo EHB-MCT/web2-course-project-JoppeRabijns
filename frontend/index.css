@@ -425,7 +425,8 @@ i {
 
 }
 
-#checkbox input[type="checkbox"] {
+#checkbox input[type="checkbox"],
+#checkboxResult input[type="checkbox"] {
     height: 20px;
     width: 20px;
     background-color: rgb(239, 253, 220);
@@ -435,7 +436,8 @@ i {
     -webkit-appearance: none;
 }
 
-#checkbox input[type="checkbox"]::before {
+#checkbox input[type="checkbox"]::before,
+#checkboxResult input[type="checkbox"]::before {
     position: absolute;
     content: "";
     background-color: rgb(239, 253, 220);
@@ -445,7 +447,8 @@ i {
     border-radius: 75px 75px 0 0;
 }
 
-#checkbox input[type="checkbox"]::after {
+#checkbox input[type="checkbox"]::after,
+#checkboxResult input[type="checkbox"]::after {
     position: absolute;
     content: "";
     background-color: rgb(239, 253, 220);
@@ -459,7 +462,10 @@ i {
 
 #checkbox input[type="checkbox"]:checked,
 #checkbox input:checked[type="checkbox"]::before,
-#checkbox input:checked[type="checkbox"]::after {
+#checkbox input:checked[type="checkbox"]::after,
+#checkboxResult input[type="checkbox"]:checked,
+#checkboxResult input:checked[type="checkbox"]::before,
+#checkboxResult input:checked[type="checkbox"]::after {
     background-color: #A2CE2A;
 }
 
@@ -653,6 +659,7 @@ i {
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 44px;
     display: inline-block;
+    position: relative;
 }
 
 #recipeImage {
@@ -709,6 +716,26 @@ i {
     color: #fff;
 }
 
+
+#checkboxResult {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    z-index: 999;
+    right: 40px;
+    top: 20px;
+}
+
+#cardInfoTimeResult {
+    position: absolute;
+    top: 20px;
+    right: 80px;
+    width: 50px;
+    height: 20px;
+    background: #A2CE2A;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 44px;
+}
 
 #similarRecipes {
     margin-top: 20px;

@@ -103,6 +103,12 @@ function renderRecipe(data) {
   <div id="recipeImage">
     <img src="${data.image}" alt="">
   </div>
+  <div id="checkboxResult">
+    <input class="checkbox"id='${data.id}' type="checkbox">
+  </div>
+  <div id="cardInfoTimeResult">
+     <h6 id="cardInfoText"><i class="icon-clock"></i>${data.readyInMinutes}</h6>
+  </div>
   
   <div id="recipeIngredients">
     <h3>Ingredients</h3>
