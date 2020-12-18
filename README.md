@@ -9,7 +9,7 @@ https://web2-course-project-site-joppe.herokuapp.com
 
 ### Login data:
 
-  > email: joppe@rabijns.be_
+  > email: joppe@rabijns.be </br>
   > password: test
 
 ### note: 
