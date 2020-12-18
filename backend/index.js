@@ -21,6 +21,8 @@ db.on('open', () => {
   console.log("Database connection open");
 });
 
+app.use(cors());
+
 //ROUTES
 const AuthRoute = require('./routes/auth');
 const RestaurantRoute = require('./routes/restaurant');
@@ -40,7 +42,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(cors());
+
 app.use('/api', AuthRoute);
 app.use('/api', RestaurantRoute);
 

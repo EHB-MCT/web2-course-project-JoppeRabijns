@@ -78,7 +78,6 @@ async function getFavorites(userData) {
         console.log(data),
           addRecipe(data, userData);
       })
-
   }
 }
 
