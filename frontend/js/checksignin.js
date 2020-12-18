@@ -1,5 +1,3 @@
-'use strict';
-
 let token = localStorage.getItem("token");
 
 fetch('https://web2-course-project-api-jopper.herokuapp.com/checkLogin', {
