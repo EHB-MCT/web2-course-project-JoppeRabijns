@@ -13,6 +13,6 @@ https://web2-course-project-site-joppe.herokuapp.com
   > Or make your own account
 
 ### Note: 
-Only 70 api calls can be made daily to retrieve recipes ...
+Only about 70 api calls can be made daily to retrieve recipes ...
 
 
