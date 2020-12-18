@@ -7,7 +7,7 @@ async function fetchData() {
   try {
     let search = localStorage.getItem("search");
     let types = localStorage.getItem("types");
-    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=b19c72e55d624db89ca25f0b25b9e63b&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
+    await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=e4f30bc969de44a4b595088db3015ab3&intolerances=gluten&number=16&query=${search}&addRecipeInformation=true&type=${types}`)
       .then(response => response.json())
       .then(data => {
         userDataFunctions(data)
@@ -103,7 +103,7 @@ function addToDatabase(data, userData) {
   Swal.fire({
     toast: true,
     showConfirmButton: false,
-    position: "center",
+    position: "top",
     imageUrl: './images/logoIcon.png',
     imageWidth: 50,
     imageHeight: 50,
@@ -116,7 +116,6 @@ function addToDatabase(data, userData) {
 
 function deleteFromDatabase(data, recipeData, userData) {
   let index = userData.favorites.indexOf(`${recipeData.id}`);
-  data.splice(index, 1);
   userData.favorites.splice(index, 1);
   sendToDatabase(userData.favorites);
 }

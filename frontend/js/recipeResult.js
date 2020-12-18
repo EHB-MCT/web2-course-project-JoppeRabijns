@@ -3,16 +3,29 @@ fetchSimilarData();
 
 async function fetchData() {
   let idRecipe = localStorage.getItem("idRecipe");
-  let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=b19c72e55d624db89ca25f0b25b9e63b`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=e4f30bc969de44a4b595088db3015ab3`);
   let data = await response.json();
   console.log(data);
-  renderRecipe(data);
-
+  userDataRecipe(data);
 }
+
+function userDataRecipe(data) {
+  let token = localStorage.getItem("token");
+  let userId = localStorage.getItem("userId");
+  fetch(`https://web2-course-project-api-jopper.herokuapp.com/api/userData/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  }).then(response => response.json()
+    .then(userData => renderRecipe(data, userData))
+  );
+}
+
 
 async function fetchSimilarData() {
   let idRecipe = localStorage.getItem("idRecipe");
-  let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=b19c72e55d624db89ca25f0b25b9e63b&number=4`);
+  let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=e4f30bc969de44a4b595088db3015ab3&number=4`);
   let data = await similarResponse.json();
   userDataFunctions(data);
 }
@@ -99,7 +112,7 @@ async function sendToDatabase(favoritesArray) {
 
 
 
-function renderRecipe(data) {
+function renderRecipe(data, userData) {
   let ingredients = ``;
   let instructions = ``;
   let HTML = ``;
@@ -143,5 +156,19 @@ function renderRecipe(data) {
 
   document.getElementById("recipeBack").addEventListener("click", () => {
     window.history.back();
+  });
+  if (userData.favorites.indexOf(`${data.id}`) != -1) {
+    document.getElementById(data.id).checked = true;
+  }
+  document.getElementById(`${data.id}`).addEventListener("change", () => {
+    if (userData.favorites.indexOf(`${data.id}`) === -1) {
+      JSON.stringify(data.id);
+      userData.favorites.push(JSON.stringify(data.id));
+      sendToDatabase(userData.favorites);
+    } else {
+      let index = userData.favorites.indexOf(`${data.id}`);
+      userData.favorites.splice(index, 1);
+      sendToDatabase(userData.favorites);
+    }
   });
 }
