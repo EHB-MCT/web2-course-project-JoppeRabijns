@@ -56,22 +56,32 @@ function addRecipe(data, userData) {
     });
     if (userData.favorites.indexOf(`${data[key].id}`) != -1) {
       document.getElementById(data[key].id).checked = true;
-      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
-        let index = userData.favorites.indexOf(`${data[key].id}`);
-        data.splice(index, 1);
-        userData.favorites.splice(index, 1);
-        sendToDatabase(userData.favorites);
-      });
-    } else {
-      document.getElementById(`${data[key].id}`).addEventListener("change", () => {
-        JSON.stringify(data[key].id);
-        userData.favorites.push(JSON.stringify(data[key].id));
-        console.log(userData.favorites);
-        sendToDatabase(userData.favorites);
-      });
     }
+    document.getElementById(`${data[key].id}`).addEventListener("change", () => {
+      if (userData.favorites.indexOf(`${data[key].id}`) === -1) {
+        addToDatabase(data[key], userData);
+      } else {
+        let recipeData = data[key];
+        deleteFromDatabase(data, recipeData, userData);
+      }
+    });
   }
 }
+
+function addToDatabase(data, userData) {
+  JSON.stringify(data.id);
+  userData.favorites.push(JSON.stringify(data.id));
+  sendToDatabase(userData.favorites);
+}
+
+
+function deleteFromDatabase(data, recipeData, userData) {
+  let index = userData.favorites.indexOf(`${recipeData.id}`);
+  data.splice(index, 1);
+  userData.favorites.splice(index, 1);
+  sendToDatabase(userData.favorites);
+}
+
 
 async function sendToDatabase(favoritesArray) {
   let id = localStorage.getItem("userId");

@@ -48,7 +48,7 @@ function firstLoginNotification(userData) {
       Swal.fire({
         toast: true,
         showConfirmButton: false,
-        position: "top-right",
+        position: "top",
         timer: 5000,
         allowOutsideClick: true,
         imageUrl: './images/logoIcon.png',
@@ -72,7 +72,7 @@ async function getFavorites(userData) {
     HTML += `<h1>You have no favorites</h1>`;
     document.getElementById("favorites").innerHTML = HTML;
   } else {
-    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=cee7a81c28e441efa3b14a67c611c790&ids=${userData.favorites}`)
+    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=b19c72e55d624db89ca25f0b25b9e63b&ids=${userData.favorites}`)
       .then(response => response.json())
       .then(data => {
         console.log(data),
