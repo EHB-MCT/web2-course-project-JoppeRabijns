@@ -1,8 +1,13 @@
 # web2-course-project-JoppeRabijns
 
-GLUTENVRIJ DICHTBIJ
+[![N|Solid](https://web2-course-project-site-joppe.herokuapp.com/images/logoIcon.png)](https://web2-course-project-site-joppe.herokuapp.com/)
 
-https://web2-course-project-site-joppe.herokuapp.com/index.html
+### Login data:
 
-LOGIN: joppe@rabijns.be 
-PASSWORD: test
+  > email: joppe@rabijns.be
+  > password: test
+
+### note: 
+only 70 api calls can be made daily to retrieve recipes ...
+
+
