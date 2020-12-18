@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const app = express();
 const path = require("path");
+const listEndpoints = require("express-list-endpoints");
+
 
 mongoose.connect("mongodb+srv://root:root@cluster0.bo4mb.mongodb.net/glutenvrijdichtbij?retryWrites=true&w=majority", {
   useNewUrlParser: true,
@@ -28,7 +30,7 @@ const AuthRoute = require('./routes/auth');
 const RestaurantRoute = require('./routes/restaurant');
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+  res.send(listEndpoints(app));
 });
 
 const authenticate = require('./middleware/authentification');
