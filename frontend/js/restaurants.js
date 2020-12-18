@@ -26,7 +26,6 @@ async function fetchData() {
       console.log(data);
       createMarkers(data), createRestaurantList(data), sortOnLocationGeocoder(data), sortOnLocationGeolocation(data)
     });
-  hideLoader();
 }
 
 let geocoder = new MapboxGeocoder({
@@ -153,6 +152,7 @@ function createMarkers(data) {
       });
     }
   }
+  hideLoader();
 }
 
 function createRestaurantList(data) {

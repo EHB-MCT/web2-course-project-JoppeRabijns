@@ -1,3 +1,4 @@
+'use strict';
 fetchData();
 fetchSimilarData();
 
@@ -85,6 +86,18 @@ function addToDatabase(data, userData) {
   JSON.stringify(data.id);
   userData.favorites.push(JSON.stringify(data.id));
   sendToDatabase(userData.favorites);
+  Swal.fire({
+    toast: true,
+    showConfirmButton: false,
+    position: "top",
+    imageUrl: './images/logoIcon.png',
+    imageWidth: 50,
+    imageHeight: 50,
+    timer: 2000,
+    width: "300px",
+    title: `Added to favourites!`
+  });
+
 }
 
 

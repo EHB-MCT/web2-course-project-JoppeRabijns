@@ -1,3 +1,4 @@
+'use strict';
 document.getElementById("loginForm").addEventListener("submit", (event) => {
   event.preventDefault();
   let name = document.getElementById("loginFormName").value;
@@ -33,7 +34,7 @@ function redirect(data) {
   const alert = Swal.mixin({
     position: 'center',
     showConfirmButton: false,
-    timer: 2500,
+    timer: 1500,
     timerProgressBar: true
   });
   alert.fire({

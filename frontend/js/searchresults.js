@@ -89,8 +89,7 @@ function addRecipe(data, userData) {
       if (userData.favorites.indexOf(`${data[key].id}`) === -1) {
         addToDatabase(data[key], userData);
       } else {
-        let recipeData = data[key];
-        deleteFromDatabase(data, recipeData, userData);
+        deleteFromDatabase(data[key], userData);
       }
     });
   }
@@ -114,8 +113,8 @@ function addToDatabase(data, userData) {
 }
 
 
-function deleteFromDatabase(data, recipeData, userData) {
-  let index = userData.favorites.indexOf(`${recipeData.id}`);
+function deleteFromDatabase(data, userData) {
+  let index = userData.favorites.indexOf(`${data.id}`);
   userData.favorites.splice(index, 1);
   sendToDatabase(userData.favorites);
 }
