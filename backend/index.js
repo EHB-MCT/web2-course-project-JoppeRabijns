@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const morgan = require('morgan');
 const app = express();
 const path = require("path");
+const listEndpoints = require('express-list-endpoints');
 
 mongoose.connect("mongodb+srv://root:root@cluster0.bo4mb.mongodb.net/glutenvrijdichtbij?retryWrites=true&w=majority", {
   useNewUrlParser: true,
@@ -23,7 +24,6 @@ db.on('open', () => {
 });
 
 //MIDDLEWARE 
-app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -34,6 +34,9 @@ app.listen(port, () => {
   console.log("server is listening");
 });
 
+app.get('/', (req, res) => {
+  res.send(listEndpoints(app));
+});
 
 
 const authenticate = require('./middleware/authentification');
@@ -41,7 +44,6 @@ const authenticate = require('./middleware/authentification');
 app.get('/checkLogin', authenticate, (req, res) => {
   res.send("true");
 });
-
 
 
 const AuthRoute = require('./routes/auth');
