@@ -5,7 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const app = express();
-const path = require("path");
+const swaggerUi = require("swagger-ui-express");
+swaggerDocument = require("./swagger.json");
 
 mongoose.connect("mongodb+srv://root:root@cluster0.bo4mb.mongodb.net/glutenvrijdichtbij?retryWrites=true&w=majority", {
   useNewUrlParser: true,
@@ -25,9 +26,7 @@ db.on('open', () => {
 const AuthRoute = require('./routes/auth');
 const RestaurantRoute = require('./routes/restaurant');
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
-});
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const authenticate = require('./middleware/authentification');
 
