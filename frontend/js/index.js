@@ -72,7 +72,7 @@ async function getFavorites(userData) {
     HTML += `<h1>You have no favorites</h1>`;
     document.getElementById("favorites").innerHTML = HTML;
   } else {
-    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=e4f30bc969de44a4b595088db3015ab3&ids=${userData.favorites}`)
+    await fetch(`https://api.spoonacular.com/recipes/informationBulk?apiKey=cee7a81c28e441efa3b14a67c611c790&ids=${userData.favorites}`)
       .then(response => response.json())
       .then(data => {
         console.log(data),

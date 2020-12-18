@@ -4,7 +4,7 @@ fetchSimilarData();
 
 async function fetchData() {
   let idRecipe = localStorage.getItem("idRecipe");
-  let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=e4f30bc969de44a4b595088db3015ab3`);
+  let response = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/information?apiKey=cee7a81c28e441efa3b14a67c611c790`);
   let data = await response.json();
   console.log(data);
   userDataRecipe(data);
@@ -26,7 +26,7 @@ function userDataRecipe(data) {
 
 async function fetchSimilarData() {
   let idRecipe = localStorage.getItem("idRecipe");
-  let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=e4f30bc969de44a4b595088db3015ab3&number=4`);
+  let similarResponse = await fetch(`https://api.spoonacular.com/recipes/${idRecipe}/similar?apiKey=cee7a81c28e441efa3b14a67c611c790&number=4`);
   let data = await similarResponse.json();
   userDataFunctions(data);
 }
