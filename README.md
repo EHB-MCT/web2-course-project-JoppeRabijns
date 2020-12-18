@@ -9,10 +9,11 @@ https://web2-course-project-site-joppe.herokuapp.com
 
 ### Login data:
 
-  > email: joppe@rabijns.be </br>
-  > password: test
+  > email: <b>joppe@rabijns.be</b></br>
+  > password: <b>test</b>
+  > Or make your own account
 
-### note: 
-only 70 api calls can be made daily to retrieve recipes ...
+### Note: 
+Only 70 api calls can be made daily to retrieve recipes ...
 
 
